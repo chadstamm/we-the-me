@@ -84,11 +84,6 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
                 Think of it as a foundation layer for everything you do with AI.
               </p>
 
-              <p className="text-muted">
-                We don&apos;t store your answers. Your constitution is generated in real-time
-                and delivered directly to you.
-              </p>
-
               <div className="pt-5 mt-5 border-t border-cream">
                 <p className="text-muted text-xs">
                   Built by{' '}

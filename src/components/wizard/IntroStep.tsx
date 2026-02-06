@@ -58,43 +58,138 @@ export default function IntroStep() {
             Your AI doesn&apos;t know you
           </motion.p>
 
-          {/* Brand illustration — quill & scroll */}
+          {/* Brand illustration — shield crest with quill */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
-            className="mb-8"
+            transition={{ delay: 0.35, duration: 0.8, type: 'spring', damping: 20 }}
+            className="mb-10"
           >
-            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" className="mx-auto text-accent" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              {/* Scroll/parchment */}
-              <path d="M14 44c0-2.2 1.8-4 4-4h24c2.2 0 4 1.8 4 4" className="opacity-20" />
-              <path d="M14 12c0 2.2 1.8 4 4 4h24c2.2 0 4-1.8 4-4" className="opacity-20" />
-              <rect x="14" y="12" width="32" height="32" rx="2" className="opacity-15" fill="currentColor" stroke="none" />
-              {/* Text lines on scroll */}
-              <line x1="20" y1="22" x2="36" y2="22" className="opacity-25" />
-              <line x1="20" y1="27" x2="34" y2="27" className="opacity-20" />
-              <line x1="20" y1="32" x2="32" y2="32" className="opacity-15" />
-              {/* Quill feather */}
-              <path d="M38 8c-4 4-8 12-10 20-0.5 2-0.8 3.5-1 5" className="opacity-60" />
-              <path d="M38 8c2 1 3.5 3 4 5.5s0 5.5-1.5 8" className="opacity-40" />
-              <path d="M38 8c-1-1-0.5-3 1-5 0.5 2 0.2 3.5-1 5z" fill="currentColor" className="opacity-50" />
-              {/* Quill tip / nib */}
-              <path d="M27 33l-1.5 5.5L28 36" className="opacity-50" />
-              {/* Ink dot */}
-              <circle cx="26" cy="38" r="1" fill="currentColor" className="opacity-40" />
+            <svg width="200" height="220" viewBox="0 0 200 220" fill="none" className="mx-auto" xmlns="http://www.w3.org/2000/svg">
+              {/* Outer glow */}
+              <defs>
+                <radialGradient id="crestGlow" cx="50%" cy="45%" r="50%">
+                  <stop offset="0%" stopColor="rgb(176,141,87)" stopOpacity="0.15" />
+                  <stop offset="100%" stopColor="rgb(176,141,87)" stopOpacity="0" />
+                </radialGradient>
+                <linearGradient id="goldShimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="rgb(176,141,87)" stopOpacity="0.6" />
+                  <stop offset="50%" stopColor="rgb(212,185,130)" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="rgb(176,141,87)" stopOpacity="0.6" />
+                </linearGradient>
+              </defs>
+
+              {/* Background glow */}
+              <ellipse cx="100" cy="100" rx="90" ry="95" fill="url(#crestGlow)" />
+
+              {/* Shield outline — elegant heraldic shape */}
+              <motion.path
+                d="M100 12 L168 45 C172 47 175 52 175 57 L175 105 C175 140 145 172 100 198 C55 172 25 140 25 105 L25 57 C25 52 28 47 32 45 Z"
+                stroke="url(#goldShimmer)"
+                strokeWidth="1.2"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1.5, ease: 'easeInOut' }}
+              />
+
+              {/* Inner shield line */}
+              <motion.path
+                d="M100 26 L158 54 C160 55 162 58 162 61 L162 103 C162 133 137 160 100 183 C63 160 38 133 38 103 L38 61 C38 58 40 55 42 54 Z"
+                stroke="rgb(176,141,87)"
+                strokeWidth="0.5"
+                strokeOpacity="0.3"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{ delay: 0.8, duration: 1.2, ease: 'easeInOut' }}
+              />
+
+              {/* Quill feather — sweeping elegant curve */}
+              <motion.path
+                d="M68 155 C72 130 82 105 100 82 C105 75 112 70 118 72 C124 74 122 82 118 90 C110 106 98 120 92 140 L90 148"
+                stroke="url(#goldShimmer)"
+                strokeWidth="1.5"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 0.7 }}
+                transition={{ delay: 1.2, duration: 1.0, ease: 'easeOut' }}
+              />
+
+              {/* Feather barbs — delicate lines */}
+              <motion.g
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.35 }}
+                transition={{ delay: 1.8, duration: 0.6 }}
+              >
+                <line x1="105" y1="78" x2="125" y2="65" stroke="rgb(176,141,87)" strokeWidth="0.5" />
+                <line x1="108" y1="85" x2="128" y2="73" stroke="rgb(176,141,87)" strokeWidth="0.5" />
+                <line x1="110" y1="92" x2="130" y2="82" stroke="rgb(176,141,87)" strokeWidth="0.5" />
+                <line x1="107" y1="100" x2="125" y2="91" stroke="rgb(176,141,87)" strokeWidth="0.4" />
+                <line x1="103" y1="108" x2="120" y2="100" stroke="rgb(176,141,87)" strokeWidth="0.4" />
+              </motion.g>
+
+              {/* Nib / pen tip */}
+              <motion.path
+                d="M90 148 L86 162 L92 152 Z"
+                fill="rgb(176,141,87)"
+                fillOpacity="0.5"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.6, duration: 0.4 }}
+              />
+
+              {/* Written lines — text being authored */}
+              <motion.g
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.0, duration: 0.8 }}
+              >
+                <motion.line
+                  x1="60" y1="95" x2="95" y2="95"
+                  stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.4"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 2.0, duration: 0.5 }}
+                />
+                <motion.line
+                  x1="55" y1="105" x2="88" y2="105"
+                  stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.3"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 2.2, duration: 0.5 }}
+                />
+                <motion.line
+                  x1="58" y1="115" x2="82" y2="115"
+                  stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.2"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 2.4, duration: 0.5 }}
+                />
+              </motion.g>
+
+              {/* Small star / sparkle accent at quill tip */}
+              <motion.g
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: [0, 1, 0.6], scale: [0, 1.2, 1] }}
+                transition={{ delay: 2.2, duration: 0.8 }}
+                style={{ transformOrigin: '86px 162px' }}
+              >
+                <circle cx="86" cy="162" r="2" fill="rgb(212,185,130)" fillOpacity="0.6" />
+                <circle cx="86" cy="162" r="5" fill="none" stroke="rgb(212,185,130)" strokeWidth="0.3" strokeOpacity="0.3" />
+              </motion.g>
             </svg>
           </motion.div>
 
-          {/* Headline with People→Me theatrical swap — stacked for centered "The" */}
+          {/* Headline with People→Me theatrical swap — single line */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="font-display font-light text-paper leading-[0.85] mb-2 tracking-tight"
+            className="font-display font-light text-paper text-[clamp(3.5rem,10vw,8rem)] leading-[0.85] mb-2 tracking-tight"
           >
-            <span className="block text-[clamp(2rem,5vw,3.5rem)]">We</span>
-            <span className="block text-[clamp(3.5rem,10vw,8rem)]">The</span>
-            <span className="relative inline-block text-[clamp(3.5rem,10vw,8rem)]">
+            We The{' '}
+            <span className="relative inline-block">
               <motion.span
                 initial={{ opacity: 1, filter: 'blur(0px)' }}
                 animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
