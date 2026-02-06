@@ -378,7 +378,7 @@ export default function QuestionStep() {
               disabled={!canAdvance()}
               whileHover={canAdvance() ? { scale: 1.02 } : {}}
               whileTap={canAdvance() ? { scale: 0.97 } : {}}
-              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 shadow-elevated"
+              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-accent hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 shadow-elevated uppercase"
             >
               Next
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">

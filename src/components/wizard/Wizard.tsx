@@ -8,6 +8,7 @@ import QuestionStep from './QuestionStep';
 import EmailStep from './EmailStep';
 import GeneratingStep from './GeneratingStep';
 import AboutModal from '@/components/ui/AboutModal';
+import SocialShareLinks from '@/components/ui/SocialShareLinks';
 
 export default function Wizard() {
   const { state, activeQuestions } = useWizard();
@@ -40,32 +41,39 @@ export default function Wizard() {
         </AnimatePresence>
       </main>
 
-      {/* Minimal footer */}
-      <footer className="py-5 px-6">
-        <div className="max-w-4xl mx-auto flex items-center justify-center gap-4 text-[11px] text-muted/60 font-body">
+      {/* Footer — two rows */}
+      <footer className="py-6 px-6 space-y-4">
+        {/* Row 1: About · Donate · Copyright · Powered by */}
+        <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-4 text-sm text-muted/60 font-body">
+          <button
+            onClick={() => setAboutOpen(true)}
+            className="underline hover:text-accent"
+          >
+            About
+          </button>
+          <span className="text-muted/30">&middot;</span>
           <a
             href="https://buymeacoffee.com/chadn"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-accent"
+            className="underline hover:text-accent"
           >
             Donate
           </a>
           <span className="text-muted/30">&middot;</span>
           <span>&copy; 2026 WeTheMe.app</span>
           <span className="text-muted/30">&middot;</span>
-          <button
-            onClick={() => setAboutOpen(true)}
-            className="hover:text-accent"
-          >
-            About
-          </button>
-          <span className="text-muted/30">&middot;</span>
           <span>
-            <a href="https://chadstamm.com/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">Chad Stamm</a>
+            Powered by{' '}
+            <a href="https://chadstamm.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">Chad Stamm</a>
             {' & '}
-            <a href="https://tmcdigitalmedia.com/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">TMC Digital Media</a>
+            <a href="https://tmcdigitalmedia.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">TMC Digital Media</a>
           </span>
+        </div>
+
+        {/* Row 2: Social share centered */}
+        <div className="flex justify-center">
+          <SocialShareLinks />
         </div>
       </footer>
 

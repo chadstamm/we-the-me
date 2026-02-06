@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useWizard } from '@/context/WizardContext';
-import SocialShareLinks from '@/components/ui/SocialShareLinks';
 
 const steps = [
   {
@@ -59,15 +58,30 @@ export default function IntroStep() {
             Your AI doesn&apos;t know you
           </motion.p>
 
-          {/* Headline with People→Me theatrical swap */}
+          {/* Brand mark */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.6 }}
+            className="mb-8"
+          >
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="mx-auto">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="0.5" className="text-accent/30" />
+              <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="0.5" className="text-accent/20" />
+              <text x="24" y="28" textAnchor="middle" className="text-accent" fill="currentColor" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="16" fontWeight="300" letterSpacing="2">WM</text>
+            </svg>
+          </motion.div>
+
+          {/* Headline with People→Me theatrical swap — stacked for centered "The" */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="text-[clamp(3.5rem,10vw,8rem)] font-display font-light text-paper leading-[0.9] mb-2 tracking-tight"
+            className="font-display font-light text-paper leading-[0.85] mb-2 tracking-tight"
           >
-            We The{' '}
-            <span className="relative inline-block">
+            <span className="block text-[clamp(2rem,5vw,3.5rem)]">We</span>
+            <span className="block text-[clamp(3.5rem,10vw,8rem)]">The</span>
+            <span className="relative inline-block text-[clamp(3.5rem,10vw,8rem)]">
               <motion.span
                 initial={{ opacity: 1, filter: 'blur(0px)' }}
                 animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
@@ -80,18 +94,28 @@ export default function IntroStep() {
                 initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
-                className="absolute inset-0 text-accent animate-glow"
+                className="absolute left-0 top-0 text-accent animate-glow"
               >
                 Me
               </motion.span>
             </span>
           </motion.h1>
 
+          {/* Subheader */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65, duration: 0.5 }}
+            className="text-2xl md:text-3xl font-display font-semibold text-paper/40 mt-4 tracking-wide"
+          >
+            Personal Constitution Generator
+          </motion.p>
+
           {/* Ornamental divider */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 0.4, scaleX: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
             className="w-24 h-px bg-gradient-to-r from-transparent via-paper to-transparent mx-auto my-10"
           />
 
@@ -125,7 +149,7 @@ export default function IntroStep() {
             whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(176, 141, 87, 0.2)' }}
             whileTap={{ scale: 0.97 }}
             onClick={() => dispatch({ type: 'SET_STEP', step: 1 })}
-            className="bg-accent text-ink px-14 py-4 rounded-full text-base font-medium shadow-elevated hover:bg-accent-hover font-body tracking-wide"
+            className="bg-accent text-ink px-14 py-4 rounded-full text-base font-medium shadow-elevated hover:bg-accent-hover font-body tracking-wide uppercase"
           >
             Write Yours
           </motion.button>
@@ -160,7 +184,7 @@ export default function IntroStep() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center text-[11px] uppercase tracking-[0.3em] text-muted mb-20 font-body"
+            className="text-center text-sm uppercase tracking-[0.25em] text-ink font-medium mb-20 font-body"
           >
             Three steps to being understood
           </motion.p>
@@ -181,7 +205,7 @@ export default function IntroStep() {
                 </span>
                 <div className="relative bg-paper rounded-2xl p-8 pt-10 shadow-elevated hover:shadow-elevated-lg transition-shadow duration-500">
                   <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-4 font-body">Step {step.number}</p>
-                  <h3 className="text-2xl font-display font-light text-ink mb-3">{step.title}</h3>
+                  <h3 className="text-2xl font-display font-semibold text-ink mb-3">{step.title}</h3>
                   <p className="text-sm text-ink-light leading-relaxed font-body">{step.description}</p>
                 </div>
               </motion.div>
@@ -212,22 +236,23 @@ export default function IntroStep() {
             </h2>
 
             <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
-              &ldquo;We The People&rdquo; defined a nation&apos;s identity.
-              Your Personal Constitution defines <em className="text-accent not-italic font-normal">yours</em>.
+              A Personal Constitution is your comprehensive resource containing everything
+              about you: your life, your goals, your challenges, your work, your family,
+              your personality, and your hopes and dreams.
             </p>
 
-            <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
+            <p className="text-paper leading-relaxed mb-6 text-lg font-body font-light">
               It&apos;s a structured capture of your values, beliefs, principles, and aspirations &mdash;
               written in your own words. The context document that makes AI actually
-              <em className="text-accent not-italic font-normal"> understand</em> you.
+              understand you.
             </p>
 
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto my-10" />
 
             {/* END RESULT — Life after */}
             <p className="text-paper font-display text-2xl md:text-3xl font-light leading-snug italic">
-              Upload it once. Every conversation
-              <br className="hidden sm:block" /> becomes personal.
+              Upload it <span className="text-accent">once</span>. Every conversation
+              <br className="hidden sm:block" /> becomes <span className="text-accent">personal</span>.
             </p>
           </motion.div>
         </div>
@@ -240,18 +265,15 @@ export default function IntroStep() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-muted text-sm mb-8 font-body">Ready to be understood?</p>
+          <p className="text-ink text-lg font-medium mb-8 font-body">Ready to be understood?</p>
           <motion.button
-            whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(176, 141, 87, 0.2)' }}
+            whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(176, 141, 87, 0.25)' }}
             whileTap={{ scale: 0.97 }}
             onClick={() => dispatch({ type: 'SET_STEP', step: 1 })}
-            className="bg-ink text-paper px-14 py-4 rounded-full text-base font-medium shadow-elevated hover:bg-ink-light font-body tracking-wide"
+            className="bg-ink text-paper px-14 py-4 rounded-full text-base font-medium shadow-elevated hover:bg-accent hover:text-ink font-body tracking-wide uppercase"
           >
             Begin Your Constitution
           </motion.button>
-          <div className="mt-10">
-            <SocialShareLinks />
-          </div>
         </motion.div>
       </div>
     </motion.div>

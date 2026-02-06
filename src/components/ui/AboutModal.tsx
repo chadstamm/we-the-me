@@ -66,24 +66,30 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
 
             <div className="space-y-4 text-ink-light text-sm leading-relaxed font-body">
               <p>
-                Your AI doesn&apos;t know you. Every conversation starts from zero &mdash;
-                no context, no memory, no understanding of who you are.
+                The key to maximizing AI&apos;s potential isn&apos;t better prompts &mdash;
+                it&apos;s better <strong className="text-ink">context</strong>.
               </p>
 
               <p>
-                <strong className="text-ink">We The Me</strong> fixes that. Your Personal
-                Constitution is a structured capture of your values, beliefs, principles,
-                and aspirations, written in your own words. It&apos;s the context document
-                that makes AI actually understand you.
+                Context engineering is the most critical and overlooked aspect of getting real
+                value from AI. Without context, every tool &mdash; ChatGPT, Claude, Gemini &mdash;
+                gives you the same generic answers it gives everyone else.
               </p>
 
               <p>
-                Upload it to ChatGPT, Claude, Gemini, or any custom GPT. Use it as the
-                base layer for an AI chief of staff, a Write Like Me codex, or any workflow
-                where personalization matters.
+                <strong className="text-ink">A Personal Constitution is the most impactful way
+                to give AI context about who you are.</strong> It&apos;s a structured document
+                containing your values, beliefs, goals, challenges, personality, and aspirations.
+                Upload it once and every interaction becomes personalized to you.
               </p>
 
               <p>
+                Think of it as the foundation layer for everything you build with AI &mdash;
+                a chief of staff, a Write Like Me codex, a decision-making partner, or any
+                workflow where personalization matters.
+              </p>
+
+              <p className="text-muted">
                 We don&apos;t store your answers. Your constitution is generated in real-time
                 and delivered directly to you.
               </p>

@@ -177,7 +177,7 @@ export default function EmailStep() {
               disabled={!isValid}
               whileHover={isValid ? { scale: 1.02, boxShadow: '0 8px 30px rgba(176, 141, 87, 0.25)' } : {}}
               whileTap={isValid ? { scale: 0.97 } : {}}
-              className="bg-ink text-paper px-10 py-3.5 rounded-full text-sm font-medium font-body hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed shadow-elevated"
+              className="bg-ink text-paper px-10 py-3.5 rounded-full text-sm font-medium font-body hover:bg-accent hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed shadow-elevated uppercase"
             >
               Generate My Constitution
             </motion.button>
