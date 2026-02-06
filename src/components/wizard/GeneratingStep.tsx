@@ -222,7 +222,7 @@ export default function GeneratingStep() {
               hasStartedRef.current = false;
               generate();
             }}
-            className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-ink-light shadow-elevated"
+            className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-accent hover:text-ink shadow-elevated uppercase"
           >
             Try Again
           </button>
@@ -281,7 +281,7 @@ export default function GeneratingStep() {
         >
           <button
             onClick={downloadPDF}
-            className="flex items-center gap-2 bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-ink-light shadow-elevated"
+            className="flex items-center gap-2 bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-accent hover:text-ink shadow-elevated uppercase"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -293,7 +293,7 @@ export default function GeneratingStep() {
 
           <button
             onClick={downloadMarkdown}
-            className="flex items-center gap-2 bg-paper border border-ink/15 text-ink px-8 py-3 rounded-full text-sm font-medium font-body hover:border-ink/30 hover:shadow-elevated"
+            className="flex items-center gap-2 bg-paper border border-ink/15 text-ink px-8 py-3 rounded-full text-sm font-medium font-body hover:border-ink/30 hover:shadow-elevated uppercase"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -304,7 +304,7 @@ export default function GeneratingStep() {
 
           <button
             onClick={copyToClipboard}
-            className="flex items-center gap-2 bg-paper border border-ink/15 text-ink px-8 py-3 rounded-full text-sm font-medium font-body hover:border-ink/30 hover:shadow-elevated"
+            className="flex items-center gap-2 bg-paper border border-ink/15 text-ink px-8 py-3 rounded-full text-sm font-medium font-body hover:border-ink/30 hover:shadow-elevated uppercase"
           >
             {copied ? (
               <>
