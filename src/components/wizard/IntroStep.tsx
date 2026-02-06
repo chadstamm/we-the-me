@@ -58,17 +58,30 @@ export default function IntroStep() {
             Your AI doesn&apos;t know you
           </motion.p>
 
-          {/* Brand mark */}
+          {/* Brand illustration — quill & scroll */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.35, duration: 0.6 }}
             className="mb-8"
           >
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="mx-auto">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="0.5" className="text-accent/30" />
-              <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="0.5" className="text-accent/20" />
-              <text x="24" y="28" textAnchor="middle" className="text-accent" fill="currentColor" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="16" fontWeight="300" letterSpacing="2">WM</text>
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" className="mx-auto text-accent" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              {/* Scroll/parchment */}
+              <path d="M14 44c0-2.2 1.8-4 4-4h24c2.2 0 4 1.8 4 4" className="opacity-20" />
+              <path d="M14 12c0 2.2 1.8 4 4 4h24c2.2 0 4-1.8 4-4" className="opacity-20" />
+              <rect x="14" y="12" width="32" height="32" rx="2" className="opacity-15" fill="currentColor" stroke="none" />
+              {/* Text lines on scroll */}
+              <line x1="20" y1="22" x2="36" y2="22" className="opacity-25" />
+              <line x1="20" y1="27" x2="34" y2="27" className="opacity-20" />
+              <line x1="20" y1="32" x2="32" y2="32" className="opacity-15" />
+              {/* Quill feather */}
+              <path d="M38 8c-4 4-8 12-10 20-0.5 2-0.8 3.5-1 5" className="opacity-60" />
+              <path d="M38 8c2 1 3.5 3 4 5.5s0 5.5-1.5 8" className="opacity-40" />
+              <path d="M38 8c-1-1-0.5-3 1-5 0.5 2 0.2 3.5-1 5z" fill="currentColor" className="opacity-50" />
+              {/* Quill tip / nib */}
+              <path d="M27 33l-1.5 5.5L28 36" className="opacity-50" />
+              {/* Ink dot */}
+              <circle cx="26" cy="38" r="1" fill="currentColor" className="opacity-40" />
             </svg>
           </motion.div>
 
@@ -106,7 +119,7 @@ export default function IntroStep() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.5 }}
-            className="text-2xl md:text-3xl font-display font-semibold text-paper/40 mt-4 tracking-wide"
+            className="text-2xl md:text-3xl font-display font-light text-paper/40 mt-4 tracking-wide"
           >
             Personal Constitution Generator
           </motion.p>
