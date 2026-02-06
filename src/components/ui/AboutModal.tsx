@@ -66,24 +66,28 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
 
             <div className="space-y-4 text-ink-light text-sm leading-relaxed">
               <p>
-                We The Me helps you craft a Personal Constitution — a living document
-                that defines who you are, what you stand for, and how you want to show up
-                in the world.
+                &ldquo;We The People&rdquo; defined a nation.
+                <strong className="text-ink"> We The Me</strong> helps you define yourself.
               </p>
 
               <p>
-                Inspired by the structure of the U.S. Constitution, your Personal Constitution
-                becomes a north star for decisions big and small. Through guided reflection
-                questions, we help you articulate your values, purpose, and commitments.
+                Your Personal Constitution is a context document — a structured capture
+                of your values, beliefs, principles, and aspirations, written in your own
+                words. It&apos;s the foundation that makes AI actually understand you.
               </p>
 
               <p>
-                Your responses are processed by AI to generate a beautifully structured
-                document unique to you. We don&apos;t store your answers — your constitution
-                is generated in real-time and delivered directly to you.
+                Upload it to ChatGPT, Claude, Gemini, or any custom GPT. Use it as the
+                base layer for an AI chief of staff, a Write Like Me codex, or any workflow
+                where personalization matters. Stop starting every AI conversation from zero.
               </p>
 
-              <div className="pt-2 border-t border-cream">
+              <p>
+                We don&apos;t store your answers. Your constitution is generated in real-time
+                and delivered directly to you. What you do with it is entirely up to you.
+              </p>
+
+              <div className="pt-3 border-t border-cream">
                 <p className="text-muted">
                   Built by{' '}
                   <a

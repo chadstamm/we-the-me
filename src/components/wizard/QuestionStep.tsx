@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useWizard } from '@/context/WizardContext';
 import { useVoiceInput } from '@/hooks/useVoiceInput';
 import Logo from '@/components/ui/Logo';
@@ -13,10 +13,34 @@ import {
   getUniquePhases,
 } from '@/utils/questionFlow';
 
+const phaseIntros: Record<number, { tagline: string; description: string }> = {
+  1: {
+    tagline: 'Who you are when no one\'s watching',
+    description: 'Let\'s start with what matters most — your values, the principles you live by, and the lines you won\'t cross.',
+  },
+  2: {
+    tagline: 'The lens through which you see everything',
+    description: 'Your beliefs shape every decision. Let\'s capture the worldview that drives you.',
+  },
+  3: {
+    tagline: 'Your operating system for daily life',
+    description: 'How you handle the hard moments defines you more than the easy ones.',
+  },
+  4: {
+    tagline: 'The person you\'re becoming',
+    description: 'Let\'s paint the picture of where you\'re headed and what fuels the journey.',
+  },
+  5: {
+    tagline: 'What makes you, you',
+    description: 'The most powerful context comes from the truths we rarely share. Go deep here.',
+  },
+};
+
 export default function QuestionStep() {
   const { state, dispatch, activeQuestions } = useWizard();
+  const [showPhaseIntro, setShowPhaseIntro] = useState(false);
+  const prevPhaseRef = useRef<number | null>(null);
 
-  // Question index is currentStep - 1 (step 0 is intro)
   const questionIndex = state.currentStep - 1;
   const question = activeQuestions[questionIndex];
 
@@ -33,6 +57,17 @@ export default function QuestionStep() {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // Show phase intro when entering a new phase
+  useEffect(() => {
+    if (!question) return;
+    if (prevPhaseRef.current !== null && prevPhaseRef.current !== question.phase) {
+      setShowPhaseIntro(true);
+      const timer = setTimeout(() => setShowPhaseIntro(false), 2200);
+      return () => clearTimeout(timer);
+    }
+    prevPhaseRef.current = question.phase;
+  }, [question]);
+
   // Reset local state when question changes
   useEffect(() => {
     if (!question) return;
@@ -46,17 +81,14 @@ export default function QuestionStep() {
 
   // Focus textarea on mount
   useEffect(() => {
-    if (textareaRef.current) {
+    if (textareaRef.current && !showPhaseIntro) {
       textareaRef.current.focus();
     }
-  }, [questionIndex]);
+  }, [questionIndex, showPhaseIntro]);
 
   const handleTranscript = useCallback(
     (transcript: string) => {
-      setLocalValue((prev) => {
-        const newVal = prev ? prev + ' ' + transcript : transcript;
-        return newVal;
-      });
+      setLocalValue((prev) => (prev ? prev + ' ' + transcript : transcript));
     },
     []
   );
@@ -85,13 +117,11 @@ export default function QuestionStep() {
       dispatch({ type: 'SET_ANSWER', questionId: question.id, value: localValue.trim() });
     }
 
-    // Move to next step
     const nextStep = state.currentStep + 1;
     dispatch({ type: 'SET_STEP', step: nextStep });
   };
 
   const goBack = () => {
-    // Save current answer before going back
     if (question.inputType === 'multiselect') {
       dispatch({ type: 'SET_ANSWER', questionId: question.id, value: localMultiselect });
     } else if (localValue.trim()) {
@@ -110,6 +140,38 @@ export default function QuestionStep() {
   const displayValue = isListening && interimTranscript
     ? localValue + (localValue ? ' ' : '') + interimTranscript
     : localValue;
+
+  // Phase intro overlay
+  if (showPhaseIntro && phaseIntros[question.phase]) {
+    const intro = phaseIntros[question.phase];
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-4 text-center"
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring', damping: 20, stiffness: 200 }}
+        >
+          <p className="text-accent uppercase tracking-[0.2em] text-sm font-medium mb-4">
+            Phase {question.phase} of {phases.length}
+          </p>
+          <h2 className="text-3xl md:text-5xl font-display text-ink mb-4">
+            {question.phaseName}
+          </h2>
+          <p className="text-lg text-ink-light italic">
+            &ldquo;{intro.tagline}&rdquo;
+          </p>
+          <p className="text-ink-light mt-4 max-w-md mx-auto">
+            {intro.description}
+          </p>
+        </motion.div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -138,37 +200,52 @@ export default function QuestionStep() {
             className="h-full bg-accent rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           />
         </div>
       </div>
 
       {/* Question Content */}
       <div className="flex-1 flex flex-col px-4 max-w-2xl mx-auto w-full py-8">
-        <h2 className="text-2xl md:text-3xl font-display text-ink leading-snug mb-3">
-          {question.question}
-        </h2>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={question.id + '-content'}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25 }}
+          >
+            <h2 className="text-2xl md:text-3xl font-display text-ink leading-snug mb-3">
+              {question.question}
+            </h2>
 
-        {question.subtext && (
-          <p className="text-ink-light mb-6 leading-relaxed">
-            {question.subtext}
-          </p>
-        )}
+            {question.subtext && (
+              <p className="text-ink-light mb-6 leading-relaxed">
+                {question.subtext}
+              </p>
+            )}
 
-        {/* Considerations callout */}
-        {question.considerations && question.considerations.length > 0 && (
-          <div className="bg-paper border border-accent/20 rounded-xl p-4 mb-6">
-            <p className="text-sm font-medium text-accent mb-2">Consider:</p>
-            <ul className="space-y-1">
-              {question.considerations.map((c, i) => (
-                <li key={i} className="text-sm text-ink-light flex items-start gap-2">
-                  <span className="text-accent mt-0.5">&#8226;</span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+            {/* Considerations callout */}
+            {question.considerations && question.considerations.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-paper border border-accent/20 rounded-xl p-4 mb-6"
+              >
+                <p className="text-sm font-medium text-accent mb-2">Go deeper:</p>
+                <ul className="space-y-1.5">
+                  {question.considerations.map((c, i) => (
+                    <li key={i} className="text-sm text-ink-light flex items-start gap-2">
+                      <span className="text-accent/60 mt-0.5 text-xs">&bull;</span>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Input */}
         {question.inputType === 'multiselect' && question.options ? (
@@ -176,9 +253,10 @@ export default function QuestionStep() {
             {question.options.map((option) => {
               const isSelected = localMultiselect.includes(option);
               return (
-                <button
+                <motion.button
                   key={option}
                   type="button"
+                  whileTap={{ scale: 0.98 }}
                   onClick={() =>
                     setLocalMultiselect((prev) => toggleMultiselectValue(prev, option))
                   }
@@ -196,28 +274,23 @@ export default function QuestionStep() {
                     >
                       {isSelected && (
                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path
-                            d="M2 5L4 7L8 3"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
+                          <path d="M2 5L4 7L8 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </span>
                     {option}
                   </span>
-                </button>
+                </motion.button>
               );
             })}
           </div>
         ) : question.inputType === 'select' && question.options ? (
           <div className="space-y-2 mb-6">
             {question.options.map((option) => (
-              <button
+              <motion.button
                 key={option}
                 type="button"
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setLocalValue(option)}
                 className={`w-full text-left px-4 py-3 rounded-xl border text-sm transition-all ${
                   localValue === option
@@ -226,7 +299,7 @@ export default function QuestionStep() {
                 }`}
               >
                 {option}
-              </button>
+              </motion.button>
             ))}
           </div>
         ) : (
@@ -238,7 +311,7 @@ export default function QuestionStep() {
               onKeyDown={handleKeyDown}
               placeholder={question.placeholder}
               rows={6}
-              className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/60 resize-none focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
+              className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 pr-12 text-ink placeholder:text-muted/50 resize-none focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all leading-relaxed"
             />
             {/* Voice input button */}
             {isSupported && (
@@ -298,17 +371,19 @@ export default function QuestionStep() {
                 Skip
               </button>
             )}
-            <button
+            <motion.button
               type="button"
               onClick={saveAndAdvance}
               disabled={!canAdvance()}
+              whileHover={canAdvance() ? { scale: 1.02 } : {}}
+              whileTap={canAdvance() ? { scale: 0.98 } : {}}
               className="bg-ink text-paper px-6 py-2.5 rounded-full text-sm font-medium hover:bg-ink-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
             >
               Next
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 4L10 8L6 12" />
               </svg>
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -321,10 +396,11 @@ export default function QuestionStep() {
       {/* Phase Dots */}
       <div className="flex justify-center gap-2 pb-6">
         {phases.map((phase) => (
-          <div
+          <motion.div
             key={phase}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              phase === question.phase ? 'bg-accent' : 'bg-muted/30'
+            layout
+            className={`h-2 rounded-full transition-colors ${
+              phase === question.phase ? 'bg-accent w-6' : 'bg-muted/30 w-2'
             }`}
           />
         ))}

@@ -7,13 +7,14 @@ import Logo from '@/components/ui/Logo';
 import SocialShareLinks from '@/components/ui/SocialShareLinks';
 
 const loadingMessages = [
-  'Analyzing your values and aspirations...',
-  'Weaving your purpose into words...',
-  'Crafting your constitutional framework...',
+  'Reading between the lines of your values...',
+  'Mapping your beliefs into a coherent worldview...',
   'Drafting your preamble...',
-  'Defining your articles of commitment...',
-  'Polishing the final document...',
-  'Almost there — your constitution is taking shape...',
+  'Structuring your articles of identity...',
+  'Weaving your principles into prose...',
+  'Capturing your aspirations and vision...',
+  'Integrating the unfiltered truths...',
+  'Polishing your Personal Constitution...',
 ];
 
 export default function GeneratingStep() {
@@ -54,7 +55,7 @@ export default function GeneratingStep() {
 
       dispatch({ type: 'SET_DOCUMENT', document: data.document });
 
-      // Send email in background (fire and forget)
+      // Send email in background
       if (state.email) {
         fetch('/api/email', {
           method: 'POST',
@@ -64,9 +65,7 @@ export default function GeneratingStep() {
             firstName: state.firstName,
             document: data.document,
           }),
-        }).catch(() => {
-          // Email delivery is optional
-        });
+        }).catch(() => {});
       }
     } catch (err) {
       dispatch({
@@ -91,7 +90,6 @@ export default function GeneratingStep() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
       const textarea = document.createElement('textarea');
       textarea.value = state.generatedDocument;
       document.body.appendChild(textarea);
@@ -115,7 +113,6 @@ export default function GeneratingStep() {
   };
 
   const downloadPDF = () => {
-    // Simple print-to-PDF approach
     if (!state.generatedDocument) return;
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
@@ -126,24 +123,29 @@ export default function GeneratingStep() {
         <head>
           <title>Personal Constitution - ${state.firstName || ''} ${state.lastName || ''}</title>
           <style>
+            @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500&display=swap');
             body {
-              font-family: Georgia, serif;
+              font-family: 'DM Sans', Georgia, serif;
               max-width: 700px;
               margin: 40px auto;
               padding: 20px;
               color: #1a1a2e;
               line-height: 1.8;
             }
-            h1 { font-size: 28px; text-align: center; margin-bottom: 30px; }
-            h2 { font-size: 20px; margin-top: 30px; border-bottom: 1px solid #c8a26e; padding-bottom: 5px; }
+            h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; text-align: center; margin-bottom: 30px; font-weight: normal; }
+            h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 20px; margin-top: 30px; border-bottom: 1px solid #c8a26e; padding-bottom: 5px; font-weight: normal; }
             h3 { font-size: 16px; margin-top: 20px; }
             p { margin: 10px 0; }
             ul, ol { padding-left: 24px; }
             li { margin: 4px 0; }
-            blockquote { border-left: 3px solid #c8a26e; margin: 16px 0; padding: 8px 16px; color: #3a3a5e; }
+            blockquote { border-left: 3px solid #c8a26e; margin: 16px 0; padding: 8px 16px; color: #3a3a5e; font-style: italic; }
+            .footer { text-align: center; margin-top: 40px; color: #9ca3af; font-size: 12px; border-top: 1px solid #c8a26e; padding-top: 20px; }
           </style>
         </head>
-        <body>${markdownToHtml(state.generatedDocument)}</body>
+        <body>
+          ${markdownToHtml(state.generatedDocument)}
+          <div class="footer">Created with WeTheMe.app</div>
+        </body>
       </html>
     `);
     printWindow.document.close();
@@ -159,15 +161,18 @@ export default function GeneratingStep() {
         className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-4"
       >
         <div className="text-center max-w-md">
-          {/* Animated quill icon */}
+          {/* Animated quill */}
           <motion.div
-            animate={{ rotate: [0, -10, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{
+              rotate: [0, -8, 8, -8, 0],
+              y: [0, -2, 0, -2, 0],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             className="mb-8"
           >
             <svg
-              width="48"
-              height="48"
+              width="56"
+              height="56"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -185,7 +190,7 @@ export default function GeneratingStep() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="text-ink-light text-lg mb-6"
+              className="text-ink-light text-lg mb-8 font-display"
             >
               {loadingMessages[messageIndex]}
             </motion.p>
@@ -258,16 +263,22 @@ export default function GeneratingStep() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', damping: 15, stiffness: 200, delay: 0.2 }}
+            className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4"
+          >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent">
               <polyline points="20 6 9 17 4 12" />
             </svg>
-          </div>
+          </motion.div>
           <h2 className="text-3xl md:text-4xl font-display text-ink mb-2">
             Your Constitution is Ready
           </h2>
-          <p className="text-ink-light">
-            A living document to guide your decisions and define your path.
+          <p className="text-ink-light max-w-lg mx-auto">
+            Download it. Upload it to ChatGPT, Claude, or Gemini.
+            Watch every AI interaction become personal.
           </p>
         </motion.div>
 
@@ -285,7 +296,7 @@ export default function GeneratingStep() {
           </div>
           {state.generatedDocument && state.generatedDocument.length > 2000 && (
             <p className="text-sm text-muted mt-4 text-center">
-              Showing first 2,000 characters. Download the full document below.
+              Preview — download for the full document.
             </p>
           )}
         </motion.div>
@@ -295,7 +306,7 @@ export default function GeneratingStep() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-8"
+          className="flex flex-wrap justify-center gap-3 mb-6"
         >
           <button
             onClick={downloadPDF}
@@ -317,7 +328,7 @@ export default function GeneratingStep() {
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
             </svg>
-            Download MD
+            Download Markdown
           </button>
 
           <button
@@ -343,11 +354,39 @@ export default function GeneratingStep() {
           </button>
         </motion.div>
 
+        {/* How to use callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="w-full bg-accent/5 border border-accent/15 rounded-xl p-5 mb-8"
+        >
+          <p className="text-sm font-medium text-accent mb-2">How to use your constitution:</p>
+          <ul className="text-sm text-ink-light space-y-1.5">
+            <li className="flex items-start gap-2">
+              <span className="text-accent/60 mt-0.5">&bull;</span>
+              Upload to ChatGPT, Claude, or Gemini as a context document
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-accent/60 mt-0.5">&bull;</span>
+              Add it to custom GPTs, Claude Projects, or AI workflows
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-accent/60 mt-0.5">&bull;</span>
+              Reference it before any AI conversation that matters
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-accent/60 mt-0.5">&bull;</span>
+              Update it quarterly as you grow and evolve
+            </li>
+          </ul>
+        </motion.div>
+
         {/* Social Share */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.5 }}
           className="mb-8"
         >
           <SocialShareLinks label="Spread the word:" />
@@ -357,11 +396,11 @@ export default function GeneratingStep() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6 }}
           className="text-center"
         >
           <p className="text-sm text-muted mb-2">
-            Did this resonate? Help keep it free.
+            Did this change how you use AI? Help keep it free.
           </p>
           <a
             href="https://buymeacoffee.com/chadn"

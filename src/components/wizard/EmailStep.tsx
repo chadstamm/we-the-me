@@ -15,6 +15,8 @@ export default function EmailStep() {
     (a) => (Array.isArray(a.value) ? a.value.length > 0 : a.value.trim().length > 0)
   ).length;
 
+  const phaseCount = new Set(activeQuestions.map((q) => q.phase)).size;
+
   const isValid =
     firstName.trim().length > 0 &&
     email.trim().length > 0 &&
@@ -60,12 +62,20 @@ export default function EmailStep() {
           transition={{ delay: 0.1 }}
           className="text-center mb-8"
         >
+          <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-accent">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+          </div>
           <h2 className="text-3xl md:text-4xl font-display text-ink mb-3">
-            Almost there
+            You&apos;ve done the hard part
           </h2>
           <p className="text-ink-light leading-relaxed">
-            You&apos;ve answered {answeredCount} questions across {new Set(activeQuestions.map((q) => q.phase)).size} phases.
-            Enter your details below and we&apos;ll generate your Personal Constitution.
+            {answeredCount} reflections across {phaseCount} dimensions of who you are.
+            Now let&apos;s turn that into your Personal Constitution.
           </p>
         </motion.div>
 
@@ -74,17 +84,15 @@ export default function EmailStep() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex gap-6 mb-8"
+          className="flex gap-8 mb-8"
         >
           <div className="text-center">
             <span className="text-3xl font-display text-accent">{answeredCount}</span>
-            <p className="text-xs text-muted mt-1">Questions</p>
+            <p className="text-xs text-muted mt-1">Reflections</p>
           </div>
           <div className="text-center">
-            <span className="text-3xl font-display text-accent">
-              {new Set(activeQuestions.map((q) => q.phase)).size}
-            </span>
-            <p className="text-xs text-muted mt-1">Phases</p>
+            <span className="text-3xl font-display text-accent">{phaseCount}</span>
+            <p className="text-xs text-muted mt-1">Dimensions</p>
           </div>
           <div className="text-center">
             <span className="text-3xl font-display text-accent">1</span>
@@ -110,8 +118,8 @@ export default function EmailStep() {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                placeholder="John"
-                className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/60 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
+                placeholder="Your first name"
+                className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
                 required
               />
             </div>
@@ -124,8 +132,8 @@ export default function EmailStep() {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="Doe"
-                className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/60 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
+                placeholder="Your last name"
+                className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
               />
             </div>
           </div>
@@ -139,12 +147,12 @@ export default function EmailStep() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="john@example.com"
-              className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/60 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
+              placeholder="you@example.com"
+              className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
               required
             />
             <p className="text-xs text-muted mt-1.5">
-              We&apos;ll send your constitution to this email. No spam, ever.
+              We&apos;ll send a copy to your inbox. No spam, no list.
             </p>
           </div>
 
@@ -160,13 +168,15 @@ export default function EmailStep() {
               Back
             </button>
 
-            <button
+            <motion.button
               type="submit"
               disabled={!isValid}
-              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              whileHover={isValid ? { scale: 1.02 } : {}}
+              whileTap={isValid ? { scale: 0.98 } : {}}
+              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-ink/10"
             >
               Generate My Constitution
-            </button>
+            </motion.button>
           </div>
         </motion.form>
       </div>
