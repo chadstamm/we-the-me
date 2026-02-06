@@ -106,7 +106,7 @@ export default function IntroStep() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.5 }}
-            className="text-2xl md:text-3xl font-display font-light text-paper/40 mt-4 tracking-wide"
+            className="text-2xl md:text-3xl font-display font-semibold text-paper/40 mt-4 tracking-wide"
           >
             Personal Constitution Generator
           </motion.p>
