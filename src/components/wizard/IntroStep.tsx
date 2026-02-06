@@ -80,7 +80,7 @@ export default function IntroStep() {
                 initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
-                className="absolute inset-0 text-accent animate-glow"
+                className="absolute left-0 top-0 text-accent animate-glow"
               >
                 Me
               </motion.span>
