@@ -44,7 +44,7 @@ export default function Wizard() {
       {/* Footer — two rows */}
       <footer className="py-6 px-6 space-y-4">
         {/* Row 1: About · Donate · Copyright · Powered by */}
-        <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-4 text-sm text-muted/60 font-body">
+        <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-4 text-sm text-muted font-body">
           <button
             onClick={() => setAboutOpen(true)}
             className="underline hover:text-accent"

@@ -20,7 +20,7 @@ export default function SocialShareLinks({
 
   return (
     <div className="flex items-center gap-3">
-      <span className={`text-sm ${light ? 'text-paper/50' : 'text-muted'}`}>{label}</span>
+      <span className={`text-sm ${light ? 'text-paper/50' : 'text-muted/60'}`}>{label}</span>
       <div className="flex items-center gap-2">
         {/* LinkedIn */}
         <a

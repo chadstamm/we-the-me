@@ -81,12 +81,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
                 to give AI context about who you are.</strong> It&apos;s a structured document
                 containing your values, beliefs, goals, challenges, personality, and aspirations.
                 Upload it once and every interaction becomes personalized to you.
-              </p>
-
-              <p>
-                Think of it as the foundation layer for everything you build with AI &mdash;
-                a chief of staff, a Write Like Me codex, a decision-making partner, or any
-                workflow where personalization matters.
+                Think of it as a foundation layer for everything you do with AI.
               </p>
 
               <p className="text-muted">
