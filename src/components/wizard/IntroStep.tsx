@@ -8,20 +8,17 @@ const steps = [
   {
     number: '01',
     title: 'Reflect',
-    description:
-      'Answer guided questions that surface what you truly value, believe, and stand for.',
+    description: 'Guided questions surface what you truly value, believe, and stand for — in your own words.',
   },
   {
     number: '02',
     title: 'Generate',
-    description:
-      'AI synthesizes your answers into a structured Personal Constitution — written in your voice.',
+    description: 'AI synthesizes your reflections into a structured Personal Constitution, written in your voice.',
   },
   {
     number: '03',
     title: 'Use Everywhere',
-    description:
-      'Load it into ChatGPT, Claude, Gemini — any AI. Watch generic answers become yours.',
+    description: 'Upload to ChatGPT, Claude, or Gemini. Watch generic answers become genuinely yours.',
   },
 ];
 
@@ -33,160 +30,229 @@ export default function IntroStep() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-[calc(100vh-80px)] flex flex-col"
+      transition={{ duration: 0.6 }}
+      className="flex flex-col"
     >
-      {/* Hero */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center px-4 py-16 max-w-3xl mx-auto">
-        {/* Eyebrow — StoryBrand: Name the problem */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-accent uppercase tracking-[0.2em] text-sm font-medium mb-6"
-        >
-          AI doesn&apos;t know you. Yet.
-        </motion.p>
+      {/* ─── DARK HERO ─── */}
+      <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 relative overflow-hidden bg-ink">
+        {/* Atmospheric gradient — gold glow from above */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(176,141,87,0.15),transparent)]" />
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ink to-transparent" />
 
-        {/* Headline — StoryBrand: The transformation */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-5xl md:text-7xl font-display text-ink leading-[1.1] mb-6"
-        >
-          We The People
-          <br />
-          <span className="relative inline-block">
-            <motion.span
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0 }}
-              transition={{ delay: 2.5, duration: 0.6 }}
-              className="relative"
-            >
-              People
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.8, duration: 0.6 }}
-              className="absolute inset-0 text-accent"
-            >
-              Me
-            </motion.span>
-          </span>
-        </motion.h1>
+        <div className="relative z-10 max-w-3xl mx-auto">
+          {/* Decorative line */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-10"
+          />
 
-        {/* Subhead — StoryBrand: Empathy + clarity */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-lg md:text-xl text-ink-light max-w-xl mb-4 leading-relaxed"
-        >
-          Every time you open AI, you start from zero.
-          No context. No personalization. Generic answers.
-        </motion.p>
+          {/* PROBLEM — The StoryBrand hook */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-accent uppercase tracking-[0.3em] text-[11px] font-medium mb-10 font-body"
+          >
+            Your AI doesn&apos;t know you
+          </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-lg md:text-xl text-ink max-w-xl mb-10 leading-relaxed font-medium"
-        >
-          Your Personal Constitution changes that.
-          One document that tells AI exactly who you are.
-        </motion.p>
+          {/* Headline with People→Me theatrical swap */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.7 }}
+            className="text-[clamp(3.5rem,10vw,8rem)] font-display font-light text-paper leading-[0.9] mb-2 tracking-tight"
+          >
+            We The{' '}
+            <span className="relative inline-block">
+              <motion.span
+                initial={{ opacity: 1, filter: 'blur(0px)' }}
+                animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
+                transition={{ delay: 2.8, duration: 0.6 }}
+                className="relative"
+              >
+                People
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
+                className="absolute inset-0 text-accent animate-glow"
+              >
+                Me
+              </motion.span>
+            </span>
+          </motion.h1>
 
-        {/* CTA — StoryBrand: Call to action */}
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={() => dispatch({ type: 'SET_STEP', step: 1 })}
-          className="bg-ink text-paper px-10 py-4 rounded-full text-lg font-medium hover:bg-ink-light transition-colors shadow-lg shadow-ink/10"
-        >
-          Write Your Constitution
-        </motion.button>
+          {/* Ornamental divider */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 0.4, scaleX: 1 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="w-24 h-px bg-gradient-to-r from-transparent via-paper to-transparent mx-auto my-10"
+          />
 
-        <motion.p
+          {/* EMPATHY — Shows understanding */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="text-xl md:text-2xl text-paper/60 max-w-xl mx-auto mb-4 leading-relaxed font-light font-body"
+          >
+            You&apos;ve had a thousand conversations with AI.
+            <br className="hidden md:block" />
+            Not one of them knew who you were.
+          </motion.p>
+
+          {/* ANSWER — The solution */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.5 }}
+            className="text-xl md:text-2xl text-paper max-w-xl mx-auto mb-14 leading-relaxed font-display italic"
+          >
+            A Personal Constitution changes that.
+          </motion.p>
+
+          {/* CTA — Gold on dark for maximum contrast */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.5 }}
+            whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(176, 141, 87, 0.2)' }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => dispatch({ type: 'SET_STEP', step: 1 })}
+            className="bg-accent text-ink px-14 py-4 rounded-full text-base font-medium shadow-elevated hover:bg-accent-hover font-body tracking-wide"
+          >
+            Write Yours
+          </motion.button>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.3 }}
+            className="mt-6 text-sm text-paper/30 tracking-wide font-body"
+          >
+            15 minutes &middot; Free &middot; Yours forever
+          </motion.p>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-4 text-sm text-muted"
+          animate={{ opacity: 0.3, y: [0, 6, 0] }}
+          transition={{ delay: 2.0, y: { repeat: Infinity, duration: 2.5, ease: 'easeInOut' } }}
+          className="absolute bottom-10"
         >
-          15 minutes &middot; Free &middot; Use it forever
-        </motion.p>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-paper">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </motion.div>
       </div>
 
-      {/* How It Works — StoryBrand: The plan */}
-      <div className="max-w-4xl mx-auto px-4 pb-16 w-full">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-center text-sm uppercase tracking-[0.15em] text-muted mb-8"
-        >
-          How it works
-        </motion.p>
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 + i * 0.1 }}
-              className="text-center md:text-left"
-            >
-              <span className="text-accent font-display text-3xl">
-                {step.number}
-              </span>
-              <h3 className="text-lg font-medium text-ink mt-2 mb-2">
-                {step.title}
-              </h3>
-              <p className="text-sm text-ink-light leading-relaxed">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
+      {/* ─── HOW IT WORKS ─── */}
+      <div className="py-28 px-4 bg-cream">
+        <div className="max-w-5xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-[11px] uppercase tracking-[0.3em] text-muted mb-20 font-body"
+          >
+            Three steps to being understood
+          </motion.p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15, duration: 0.5 }}
+                className="relative group"
+              >
+                {/* Oversized number — breaks the grid, overlaps */}
+                <span className="absolute -top-8 -left-2 text-[7rem] font-display font-light text-accent/[0.07] leading-none select-none pointer-events-none">
+                  {step.number}
+                </span>
+                <div className="relative bg-paper rounded-2xl p-8 pt-10 shadow-elevated hover:shadow-elevated-lg transition-shadow duration-500">
+                  <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-4 font-body">Step {step.number}</p>
+                  <h3 className="text-2xl font-display font-light text-ink mb-3">{step.title}</h3>
+                  <p className="text-sm text-ink-light leading-relaxed font-body">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* What is a Personal Constitution — StoryBrand: Authority */}
-      <div className="bg-paper border-y border-muted/10">
-        <div className="max-w-2xl mx-auto px-4 py-16 text-center">
+      {/* ─── WHAT IS A CONSTITUTION — CHANGE section ─── */}
+      <div className="bg-ink text-paper relative overflow-hidden">
+        {/* Subtle gradient accent from bottom */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(176,141,87,0.08),transparent)]" />
+
+        <div className="max-w-2xl mx-auto px-4 py-28 text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-display text-ink mb-6">
-              What is a Personal Constitution?
+            {/* Large decorative quote mark */}
+            <span className="block text-[8rem] leading-none font-display text-accent/10 select-none pointer-events-none mb-[-3rem]">
+              &ldquo;
+            </span>
+
+            <h2 className="text-3xl md:text-5xl font-display font-light mb-10 leading-tight">
+              What is a <br className="hidden sm:block" />Personal Constitution?
             </h2>
-            <p className="text-ink-light leading-relaxed mb-4">
+
+            <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
               &ldquo;We The People&rdquo; defined a nation&apos;s identity.
-              Your Personal Constitution defines <em>yours</em> — your values,
-              beliefs, principles, and aspirations, written in your own words.
+              Your Personal Constitution defines <em className="text-accent not-italic font-normal">yours</em>.
             </p>
-            <p className="text-ink-light leading-relaxed mb-4">
-              It&apos;s a context document designed to make every AI interaction
-              personal. Upload it to ChatGPT, Claude, Gemini, or any custom GPT,
-              and watch generic advice transform into guidance that actually
-              fits your life.
+
+            <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
+              It&apos;s a structured capture of your values, beliefs, principles, and aspirations &mdash;
+              written in your own words. The context document that makes AI actually
+              <em className="text-accent not-italic font-normal"> understand</em> you.
             </p>
-            <p className="text-ink font-medium leading-relaxed">
-              Stop starting every conversation from zero.
-              Give AI the context it needs to truly help you.
+
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto my-10" />
+
+            {/* END RESULT — Life after */}
+            <p className="text-paper font-display text-2xl md:text-3xl font-light leading-snug italic">
+              Upload it once. Every conversation
+              <br className="hidden sm:block" /> becomes personal.
             </p>
           </motion.div>
         </div>
       </div>
 
-      {/* Social Share */}
-      <div className="flex justify-center py-8">
-        <SocialShareLinks />
+      {/* ─── BOTTOM CTA ─── */}
+      <div className="py-24 px-4 text-center bg-cream">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-muted text-sm mb-8 font-body">Ready to be understood?</p>
+          <motion.button
+            whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(176, 141, 87, 0.2)' }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => dispatch({ type: 'SET_STEP', step: 1 })}
+            className="bg-ink text-paper px-14 py-4 rounded-full text-base font-medium shadow-elevated hover:bg-ink-light font-body tracking-wide"
+          >
+            Begin Your Constitution
+          </motion.button>
+          <div className="mt-10">
+            <SocialShareLinks />
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );

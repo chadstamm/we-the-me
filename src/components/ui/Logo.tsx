@@ -3,6 +3,7 @@
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   onClick?: () => void;
+  light?: boolean;
 }
 
 const sizeClasses = {
@@ -11,15 +12,17 @@ const sizeClasses = {
   lg: 'text-4xl',
 };
 
-export default function Logo({ size = 'md', onClick }: LogoProps) {
+export default function Logo({ size = 'md', onClick, light }: LogoProps) {
   return (
     <button
       onClick={onClick}
-      className={`font-display font-normal tracking-tight text-ink hover:text-accent transition-colors ${sizeClasses[size]}`}
+      className={`font-display font-light tracking-tight cursor-pointer ${sizeClasses[size]} ${
+        light ? 'text-paper hover:text-accent' : 'text-ink hover:text-accent'
+      }`}
       type="button"
       aria-label="Go to home"
     >
-      We The Me
+      We The <span className="text-accent">Me</span>
     </button>
   );
 }
