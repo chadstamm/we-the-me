@@ -44,7 +44,7 @@ export default function EmailStep() {
       transition={{ duration: 0.3 }}
       className="min-h-screen flex flex-col"
     >
-      {/* Progress bar at top */}
+      {/* Progress bar at top — full */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-cream">
         <div className="h-full bg-accent w-full" />
       </div>
@@ -77,11 +77,11 @@ export default function EmailStep() {
             </svg>
           </motion.div>
 
-          <h2 className="text-3xl md:text-4xl font-display text-ink mb-4 leading-tight">
-            You&apos;ve done the hard part
+          <h2 className="text-3xl md:text-4xl font-display font-light text-ink mb-4 leading-tight">
+            Your reflections are in
           </h2>
-          <p className="text-ink-light leading-relaxed">
-            Now let&apos;s turn your reflections into a Personal Constitution.
+          <p className="text-ink-light leading-relaxed font-body">
+            Time to turn them into something every AI will understand.
           </p>
         </motion.div>
 
@@ -98,8 +98,8 @@ export default function EmailStep() {
             { value: 1, label: 'Constitution' },
           ].map((stat) => (
             <div key={stat.label} className="flex-1 bg-paper rounded-xl p-4 text-center shadow-elevated">
-              <span className="text-2xl font-display text-accent block">{stat.value}</span>
-              <p className="text-[11px] text-muted mt-1 uppercase tracking-wider">{stat.label}</p>
+              <span className="text-2xl font-display font-light text-accent block">{stat.value}</span>
+              <p className="text-[11px] text-muted mt-1 uppercase tracking-[0.15em] font-body">{stat.label}</p>
             </div>
           ))}
         </motion.div>
@@ -114,7 +114,7 @@ export default function EmailStep() {
         >
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="firstName" className="block text-xs text-muted uppercase tracking-wider mb-2">
+              <label htmlFor="firstName" className="block text-[11px] text-muted uppercase tracking-[0.15em] mb-2 font-body">
                 First name *
               </label>
               <input
@@ -123,12 +123,12 @@ export default function EmailStep() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Your first name"
-                className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
+                className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink font-body placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
                 required
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-xs text-muted uppercase tracking-wider mb-2">
+              <label htmlFor="lastName" className="block text-[11px] text-muted uppercase tracking-[0.15em] mb-2 font-body">
                 Last name
               </label>
               <input
@@ -137,13 +137,13 @@ export default function EmailStep() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Your last name"
-                className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
+                className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink font-body placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-xs text-muted uppercase tracking-wider mb-2">
+            <label htmlFor="email" className="block text-[11px] text-muted uppercase tracking-[0.15em] mb-2 font-body">
               Email *
             </label>
             <input
@@ -152,11 +152,11 @@ export default function EmailStep() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
+              className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink font-body placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
               required
             />
-            <p className="text-xs text-muted mt-2">
-              We&apos;ll send a copy to your inbox. No spam, no list.
+            <p className="text-[11px] text-muted mt-2 font-body">
+              We&apos;ll send a copy to your inbox. No spam, ever.
             </p>
           </div>
 
@@ -164,7 +164,7 @@ export default function EmailStep() {
             <button
               type="button"
               onClick={goBack}
-              className="flex items-center gap-2 text-muted hover:text-ink text-sm group"
+              className="flex items-center gap-2 text-muted hover:text-ink text-sm group font-body"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="group-hover:-translate-x-0.5 transition-transform">
                 <path d="M10 12L6 8L10 4" />
@@ -177,7 +177,7 @@ export default function EmailStep() {
               disabled={!isValid}
               whileHover={isValid ? { scale: 1.02, boxShadow: '0 8px 30px rgba(176, 141, 87, 0.25)' } : {}}
               whileTap={isValid ? { scale: 0.97 } : {}}
-              className="bg-ink text-paper px-10 py-3.5 rounded-full text-sm font-medium hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed shadow-elevated"
+              className="bg-ink text-paper px-10 py-3.5 rounded-full text-sm font-medium font-body hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed shadow-elevated"
             >
               Generate My Constitution
             </motion.button>

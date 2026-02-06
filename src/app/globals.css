@@ -20,8 +20,8 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-light: var(--accent-light);
   --color-ink-light: var(--ink-light);
-  --font-display: "Instrument Serif", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Outfit", system-ui, sans-serif;
 }
 
 * {
@@ -31,13 +31,13 @@
 body {
   background: var(--cream);
   color: var(--ink);
-  font-family: "DM Sans", system-ui, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 /* Subtle grain texture overlay */
@@ -47,7 +47,7 @@ body::before {
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.02;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -119,6 +119,14 @@ a, button, input, textarea, select {
 }
 .animate-writing {
   animation: writing 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 30px rgba(176, 141, 87, 0); }
+  50% { text-shadow: 0 0 50px rgba(176, 141, 87, 0.3), 0 0 80px rgba(176, 141, 87, 0.1); }
+}
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
 }
 
 /* Ornamental line divider */

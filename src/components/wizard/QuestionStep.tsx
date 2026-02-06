@@ -16,7 +16,7 @@ import {
 const phaseIntros: Record<number, { tagline: string; description: string }> = {
   1: {
     tagline: 'Who you are when no one\'s watching',
-    description: 'Let\'s start with what matters most — your values, the principles you live by, and the lines you won\'t cross.',
+    description: 'Let\'s start with what matters most — the values, principles, and lines you won\'t cross.',
   },
   2: {
     tagline: 'The lens through which you see everything',
@@ -28,11 +28,11 @@ const phaseIntros: Record<number, { tagline: string; description: string }> = {
   },
   4: {
     tagline: 'The person you\'re becoming',
-    description: 'Let\'s paint the picture of where you\'re headed and what fuels the journey.',
+    description: 'Paint the picture of where you\'re headed and what fuels the journey.',
   },
   5: {
     tagline: 'What makes you, you',
-    description: 'The most powerful context comes from the truths we rarely share. Go deep here.',
+    description: 'The most powerful AI context comes from the truths we rarely share. Go deep here.',
   },
 };
 
@@ -135,7 +135,7 @@ export default function QuestionStep() {
     ? localValue + (localValue ? ' ' : '') + interimTranscript
     : localValue;
 
-  // Phase intro overlay
+  // Phase intro overlay — atmospheric dark screen
   if (showPhaseIntro && phaseIntros[question.phase]) {
     const intro = phaseIntros[question.phase];
     return (
@@ -143,23 +143,27 @@ export default function QuestionStep() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen flex flex-col items-center justify-center px-4 text-center bg-ink"
+        className="min-h-screen flex flex-col items-center justify-center px-4 text-center bg-ink relative overflow-hidden"
       >
+        {/* Subtle radial glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(176,141,87,0.06),transparent)]" />
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', damping: 20, stiffness: 200 }}
+          className="relative z-10"
         >
-          <p className="text-accent uppercase tracking-[0.25em] text-xs font-medium mb-6">
+          <p className="text-accent uppercase tracking-[0.3em] text-[11px] font-medium mb-6 font-body">
             Phase {question.phase} of {phases.length}
           </p>
-          <h2 className="text-4xl md:text-6xl font-display text-paper mb-4 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-display font-light text-paper mb-4 leading-tight">
             {question.phaseName}
           </h2>
-          <p className="text-lg text-paper/60 italic font-display">
+          <p className="text-lg text-paper/50 italic font-display">
             &ldquo;{intro.tagline}&rdquo;
           </p>
-          <p className="text-paper/50 mt-4 max-w-md mx-auto text-sm">
+          <p className="text-paper/40 mt-4 max-w-md mx-auto text-sm font-body">
             {intro.description}
           </p>
         </motion.div>
@@ -194,10 +198,10 @@ export default function QuestionStep() {
             onClick={() => dispatch({ type: 'SET_STEP', step: 0 })}
           />
           <div className="flex items-center gap-3">
-            <span className="text-xs uppercase tracking-wider text-muted">
+            <span className="text-[11px] uppercase tracking-[0.15em] text-muted font-body">
               {phaseInfo.phaseName}
             </span>
-            <span className="text-xs text-accent font-medium bg-accent/10 px-2.5 py-1 rounded-full">
+            <span className="text-[11px] text-accent font-medium bg-accent/10 px-2.5 py-1 rounded-full font-body">
               {questionIndex + 1}/{activeQuestions.length}
             </span>
           </div>
@@ -214,17 +218,17 @@ export default function QuestionStep() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
           >
-            <h2 className="text-3xl md:text-4xl font-display text-ink leading-snug mb-4">
+            <h2 className="text-3xl md:text-[2.75rem] font-display font-light text-ink leading-snug mb-4">
               {question.question}
             </h2>
 
             {question.subtext && (
-              <p className="text-ink-light mb-8 leading-relaxed text-base">
+              <p className="text-ink-light mb-8 leading-relaxed text-base font-body">
                 {question.subtext}
               </p>
             )}
 
-            {/* Considerations */}
+            {/* Considerations — gold left border */}
             {question.considerations && question.considerations.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
@@ -232,10 +236,10 @@ export default function QuestionStep() {
                 transition={{ delay: 0.2 }}
                 className="border-l-2 border-accent/30 pl-5 mb-8"
               >
-                <p className="text-xs font-medium text-accent uppercase tracking-wider mb-3">Go deeper</p>
+                <p className="text-[11px] font-medium text-accent uppercase tracking-[0.2em] mb-3 font-body">Go deeper</p>
                 <ul className="space-y-2">
                   {question.considerations.map((c, i) => (
-                    <li key={i} className="text-sm text-ink-light leading-relaxed">
+                    <li key={i} className="text-sm text-ink-light leading-relaxed font-body">
                       {c}
                     </li>
                   ))}
@@ -258,7 +262,7 @@ export default function QuestionStep() {
                   onClick={() =>
                     setLocalMultiselect((prev) => toggleMultiselectValue(prev, option))
                   }
-                  className={`text-left px-5 py-4 rounded-xl border text-sm transition-all ${
+                  className={`text-left px-5 py-4 rounded-xl border text-sm font-body transition-all ${
                     isSelected
                       ? 'border-accent bg-accent/8 text-ink shadow-elevated'
                       : 'border-muted/20 bg-paper text-ink-light hover:border-accent/30 hover:shadow-elevated'
@@ -290,7 +294,7 @@ export default function QuestionStep() {
                 type="button"
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setLocalValue(option)}
-                className={`w-full text-left px-5 py-4 rounded-xl border text-sm transition-all ${
+                className={`w-full text-left px-5 py-4 rounded-xl border text-sm font-body transition-all ${
                   localValue === option
                     ? 'border-accent bg-accent/8 text-ink shadow-elevated'
                     : 'border-muted/20 bg-paper text-ink-light hover:border-accent/30 hover:shadow-elevated'
@@ -309,7 +313,7 @@ export default function QuestionStep() {
               onKeyDown={handleKeyDown}
               placeholder={question.placeholder}
               rows={5}
-              className="w-full bg-paper border border-muted/20 rounded-2xl px-6 py-5 pr-14 text-ink text-base placeholder:text-muted/40 resize-none focus:outline-none focus:border-accent/40 focus:shadow-elevated transition-all leading-relaxed"
+              className="w-full bg-paper border border-muted/20 rounded-2xl px-6 py-5 pr-14 text-ink text-base font-body placeholder:text-muted/40 resize-none focus:outline-none focus:border-accent/40 focus:shadow-elevated transition-all leading-relaxed"
             />
             {isSupported && (
               <button
@@ -350,7 +354,7 @@ export default function QuestionStep() {
           <button
             type="button"
             onClick={goBack}
-            className="flex items-center gap-2 text-muted hover:text-ink text-sm group"
+            className="flex items-center gap-2 text-muted hover:text-ink text-sm group font-body"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="group-hover:-translate-x-0.5 transition-transform">
               <path d="M10 12L6 8L10 4" />
@@ -363,7 +367,7 @@ export default function QuestionStep() {
               <button
                 type="button"
                 onClick={saveAndAdvance}
-                className="text-sm text-muted hover:text-ink"
+                className="text-sm text-muted hover:text-ink font-body"
               >
                 Skip
               </button>
@@ -374,7 +378,7 @@ export default function QuestionStep() {
               disabled={!canAdvance()}
               whileHover={canAdvance() ? { scale: 1.02 } : {}}
               whileTap={canAdvance() ? { scale: 0.97 } : {}}
-              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 shadow-elevated"
+              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium font-body hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 shadow-elevated"
             >
               Next
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -385,7 +389,7 @@ export default function QuestionStep() {
         </div>
 
         {/* Keyboard hint */}
-        <p className="text-center text-xs text-muted/60 mt-6">
+        <p className="text-center text-[11px] text-muted/50 mt-6 font-body">
           Press <kbd className="px-1.5 py-0.5 bg-paper border border-muted/20 rounded text-[10px] font-mono">&#8984; Enter</kbd> to continue
         </p>
       </div>

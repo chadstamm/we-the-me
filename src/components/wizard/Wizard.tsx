@@ -42,7 +42,7 @@ export default function Wizard() {
 
       {/* Minimal footer */}
       <footer className="py-5 px-6">
-        <div className="max-w-4xl mx-auto flex items-center justify-center gap-4 text-[11px] text-muted/60">
+        <div className="max-w-4xl mx-auto flex items-center justify-center gap-4 text-[11px] text-muted/60 font-body">
           <a
             href="https://buymeacoffee.com/chadn"
             target="_blank"

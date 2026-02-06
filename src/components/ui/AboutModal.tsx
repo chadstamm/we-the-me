@@ -60,20 +60,21 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
               </svg>
             </button>
 
-            <h2 className="text-3xl font-display text-ink mb-6">
+            <h2 className="text-3xl font-display font-light text-ink mb-6">
               About We The Me
             </h2>
 
-            <div className="space-y-4 text-ink-light text-sm leading-relaxed">
+            <div className="space-y-4 text-ink-light text-sm leading-relaxed font-body">
               <p>
-                &ldquo;We The People&rdquo; defined a nation.
-                <strong className="text-ink"> We The Me</strong> helps you define yourself.
+                Your AI doesn&apos;t know you. Every conversation starts from zero &mdash;
+                no context, no memory, no understanding of who you are.
               </p>
 
               <p>
-                Your Personal Constitution is a context document — a structured capture
-                of your values, beliefs, principles, and aspirations, written in your own
-                words. It&apos;s the foundation that makes AI actually understand you.
+                <strong className="text-ink">We The Me</strong> fixes that. Your Personal
+                Constitution is a structured capture of your values, beliefs, principles,
+                and aspirations, written in your own words. It&apos;s the context document
+                that makes AI actually understand you.
               </p>
 
               <p>
