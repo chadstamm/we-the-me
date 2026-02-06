@@ -104,22 +104,33 @@ export default function IntroStep() {
             transition={{ delay: 0.8, duration: 0.5 }}
             className="mt-6 mb-2"
           >
-            <svg width="40" height="44" viewBox="0 0 40 44" fill="none" className="mx-auto" xmlns="http://www.w3.org/2000/svg">
-              {/* Scroll body */}
-              <rect x="8" y="6" width="24" height="30" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
-              {/* Top curl */}
-              <path d="M8 8 C6 4 8 1 12 1 L28 1 C32 1 34 4 32 8" stroke="rgba(255,255,255,0.3)" strokeWidth="0.8" fill="none" />
-              {/* Bottom curl */}
-              <path d="M8 34 C6 38 8 41 12 41 L28 41 C32 41 34 38 32 34" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.5" fill="none" />
+            <svg width="56" height="64" viewBox="0 0 56 64" fill="none" className="mx-auto" xmlns="http://www.w3.org/2000/svg">
+              {/* Top roll — cylinder effect */}
+              <ellipse cx="28" cy="8" rx="20" ry="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+              <path d="M8 8 C8 5 16 3 28 3 C40 3 48 5 48 8" stroke="rgb(212,185,130)" strokeWidth="0.6" strokeOpacity="0.4" fill="none" />
+              {/* Scroll paper body — unfurled */}
+              <path d="M10 8 L10 54 C10 54 16 56 28 56 C40 56 46 54 46 54 L46 8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+              {/* Paper edge shadow */}
+              <line x1="12" y1="10" x2="12" y2="52" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
+              <line x1="44" y1="10" x2="44" y2="52" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
+              {/* Bottom roll — cylinder effect */}
+              <ellipse cx="28" cy="54" rx="20" ry="4" fill="rgba(176,141,87,0.08)" stroke="rgb(176,141,87)" strokeWidth="1" strokeOpacity="0.5" />
+              <path d="M8 54 C8 57 16 59 28 59 C40 59 48 57 48 54" stroke="rgb(212,185,130)" strokeWidth="0.6" strokeOpacity="0.35" fill="none" />
+              {/* Roll end caps — left side knobs */}
+              <circle cx="8" cy="8" r="2.5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
+              <circle cx="48" cy="8" r="2.5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
+              <circle cx="8" cy="54" r="2.5" fill="rgba(176,141,87,0.1)" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.45" />
+              <circle cx="48" cy="54" r="2.5" fill="rgba(176,141,87,0.1)" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.45" />
               {/* Text lines — alternating white and gold */}
-              <line x1="13" y1="13" x2="27" y2="13" stroke="rgba(255,255,255,0.3)" strokeWidth="0.8" />
-              <line x1="13" y1="17" x2="25" y2="17" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.35" />
-              <line x1="13" y1="21" x2="26" y2="21" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
-              <line x1="13" y1="25" x2="23" y2="25" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.3" />
-              <line x1="13" y1="29" x2="21" y2="29" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
-              {/* Seal / stamp at bottom right */}
-              <circle cx="28" cy="33" r="3.5" fill="rgb(176,141,87)" fillOpacity="0.2" stroke="rgb(212,185,130)" strokeWidth="0.6" strokeOpacity="0.5" />
-              <circle cx="28" cy="33" r="1.5" fill="rgb(212,185,130)" fillOpacity="0.4" />
+              <line x1="16" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" strokeWidth="0.8" />
+              <line x1="16" y1="23" x2="38" y2="23" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.35" />
+              <line x1="16" y1="28" x2="39" y2="28" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
+              <line x1="16" y1="33" x2="36" y2="33" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.3" />
+              <line x1="16" y1="38" x2="34" y2="38" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
+              <line x1="16" y1="43" x2="32" y2="43" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.25" />
+              {/* Wax seal */}
+              <circle cx="38" cy="47" r="4" fill="rgb(176,141,87)" fillOpacity="0.2" stroke="rgb(212,185,130)" strokeWidth="0.8" strokeOpacity="0.5" />
+              <circle cx="38" cy="47" r="1.8" fill="rgb(212,185,130)" fillOpacity="0.5" />
             </svg>
           </motion.div>
 
