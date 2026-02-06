@@ -23,7 +23,6 @@ export default function GeneratingStep() {
   const [copied, setCopied] = useState(false);
   const hasStartedRef = useRef(false);
 
-  // Rotate loading messages
   useEffect(() => {
     if (!state.isGenerating) return;
     const interval = setInterval(() => {
@@ -55,7 +54,6 @@ export default function GeneratingStep() {
 
       dispatch({ type: 'SET_DOCUMENT', document: data.document });
 
-      // Send email in background
       if (state.email) {
         fetch('/api/email', {
           method: 'POST',
@@ -75,7 +73,6 @@ export default function GeneratingStep() {
     }
   }, [dispatch, state.answers, state.email, state.firstName, state.lastName]);
 
-  // Auto-generate on mount
   useEffect(() => {
     if (!hasStartedRef.current && !state.isComplete && !state.generatedDocument) {
       hasStartedRef.current = true;
@@ -129,17 +126,17 @@ export default function GeneratingStep() {
               max-width: 700px;
               margin: 40px auto;
               padding: 20px;
-              color: #1a1a2e;
+              color: #16161d;
               line-height: 1.8;
             }
             h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; text-align: center; margin-bottom: 30px; font-weight: normal; }
-            h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 20px; margin-top: 30px; border-bottom: 1px solid #c8a26e; padding-bottom: 5px; font-weight: normal; }
+            h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 20px; margin-top: 30px; border-bottom: 1px solid #b08d57; padding-bottom: 5px; font-weight: normal; }
             h3 { font-size: 16px; margin-top: 20px; }
             p { margin: 10px 0; }
             ul, ol { padding-left: 24px; }
             li { margin: 4px 0; }
-            blockquote { border-left: 3px solid #c8a26e; margin: 16px 0; padding: 8px 16px; color: #3a3a5e; font-style: italic; }
-            .footer { text-align: center; margin-top: 40px; color: #9ca3af; font-size: 12px; border-top: 1px solid #c8a26e; padding-top: 20px; }
+            blockquote { border-left: 3px solid #b08d57; margin: 16px 0; padding: 8px 16px; color: #4a4a5a; font-style: italic; }
+            .footer { text-align: center; margin-top: 40px; color: #8e8e99; font-size: 12px; border-top: 1px solid #b08d57; padding-top: 20px; }
           </style>
         </head>
         <body>
@@ -152,27 +149,20 @@ export default function GeneratingStep() {
     printWindow.print();
   };
 
-  // Loading State
+  // ─── Loading State ───
   if (state.isGenerating) {
     return (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-4"
+        className="min-h-screen flex flex-col items-center justify-center px-4 bg-ink"
       >
         <div className="text-center max-w-md">
           {/* Animated quill */}
-          <motion.div
-            animate={{
-              rotate: [0, -8, 8, -8, 0],
-              y: [0, -2, 0, -2, 0],
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            className="mb-8"
-          >
+          <motion.div className="mb-10 animate-writing">
             <svg
-              width="56"
-              height="56"
+              width="48"
+              height="48"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -187,33 +177,29 @@ export default function GeneratingStep() {
           <AnimatePresence mode="wait">
             <motion.p
               key={messageIndex}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="text-ink-light text-lg mb-8 font-display"
+              exit={{ opacity: 0, y: -8 }}
+              className="text-paper/70 text-lg mb-10 font-display"
             >
               {loadingMessages[messageIndex]}
             </motion.p>
           </AnimatePresence>
 
-          {/* Progress dots */}
-          <div className="flex justify-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent animate-dot-1" />
-            <span className="w-2 h-2 rounded-full bg-accent animate-dot-2" />
-            <span className="w-2 h-2 rounded-full bg-accent animate-dot-3" />
-          </div>
+          {/* Shimmer line */}
+          <div className="w-48 h-0.5 mx-auto rounded-full animate-shimmer" />
         </div>
       </motion.div>
     );
   }
 
-  // Error State
+  // ─── Error State ───
   if (state.error) {
     return (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-4"
+        className="min-h-screen flex flex-col items-center justify-center px-4"
       >
         <div className="text-center max-w-md">
           <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-6">
@@ -224,15 +210,15 @@ export default function GeneratingStep() {
             </svg>
           </div>
 
-          <h2 className="text-2xl font-display text-ink mb-2">Something went wrong</h2>
-          <p className="text-ink-light mb-6">{state.error}</p>
+          <h2 className="text-2xl font-display text-ink mb-3">Something went wrong</h2>
+          <p className="text-ink-light mb-8">{state.error}</p>
 
           <button
             onClick={() => {
               hasStartedRef.current = false;
               generate();
             }}
-            className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light transition-colors"
+            className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light shadow-elevated"
           >
             Try Again
           </button>
@@ -241,15 +227,15 @@ export default function GeneratingStep() {
     );
   }
 
-  // Success State
+  // ─── Success State ───
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-[calc(100vh-80px)] flex flex-col"
+      className="min-h-screen flex flex-col bg-cream"
     >
       {/* Header */}
-      <div className="px-4 pt-6 pb-4 max-w-3xl mx-auto w-full">
+      <div className="px-6 pt-8 pb-4 max-w-3xl mx-auto w-full">
         <Logo
           size="sm"
           onClick={() => dispatch({ type: 'RESET' })}
@@ -257,60 +243,41 @@ export default function GeneratingStep() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col items-center px-4 max-w-3xl mx-auto w-full py-8">
+      <div className="flex-1 flex flex-col items-center px-6 max-w-3xl mx-auto w-full py-8">
+        {/* Success header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-10"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ type: 'spring', damping: 15, stiffness: 200, delay: 0.2 }}
-            className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4"
+            transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.2 }}
+            className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </motion.div>
-          <h2 className="text-3xl md:text-4xl font-display text-ink mb-2">
+          <h2 className="text-4xl md:text-5xl font-display text-ink mb-3">
             Your Constitution is Ready
           </h2>
-          <p className="text-ink-light max-w-lg mx-auto">
-            Download it. Upload it to ChatGPT, Claude, or Gemini.
-            Watch every AI interaction become personal.
+          <p className="text-ink-light max-w-lg mx-auto text-lg">
+            Download it. Upload it to any AI. Watch every interaction become personal.
           </p>
-        </motion.div>
-
-        {/* Preview Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="w-full bg-paper border border-muted/20 rounded-2xl p-6 md:p-8 mb-6 shadow-sm"
-        >
-          <div className="prose prose-sm max-w-none text-ink-light leading-relaxed whitespace-pre-wrap">
-            {state.generatedDocument && state.generatedDocument.length > 2000
-              ? state.generatedDocument.slice(0, 2000) + '\n\n...'
-              : state.generatedDocument}
-          </div>
-          {state.generatedDocument && state.generatedDocument.length > 2000 && (
-            <p className="text-sm text-muted mt-4 text-center">
-              Preview — download for the full document.
-            </p>
-          )}
         </motion.div>
 
         {/* Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-6"
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-8"
         >
           <button
             onClick={downloadPDF}
-            className="flex items-center gap-2 bg-ink text-paper px-6 py-2.5 rounded-full text-sm font-medium hover:bg-ink-light transition-colors"
+            className="flex items-center gap-2 bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light shadow-elevated"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -322,7 +289,7 @@ export default function GeneratingStep() {
 
           <button
             onClick={downloadMarkdown}
-            className="flex items-center gap-2 border border-ink text-ink px-6 py-2.5 rounded-full text-sm font-medium hover:bg-ink hover:text-paper transition-colors"
+            className="flex items-center gap-2 bg-paper border border-ink/15 text-ink px-8 py-3 rounded-full text-sm font-medium hover:border-ink/30 hover:shadow-elevated"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -333,11 +300,11 @@ export default function GeneratingStep() {
 
           <button
             onClick={copyToClipboard}
-            className="flex items-center gap-2 border border-muted/40 text-ink-light px-6 py-2.5 rounded-full text-sm font-medium hover:border-ink hover:text-ink transition-colors"
+            className="flex items-center gap-2 bg-paper border border-ink/15 text-ink px-8 py-3 rounded-full text-sm font-medium hover:border-ink/30 hover:shadow-elevated"
           >
             {copied ? (
               <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
                 Copied!
@@ -354,76 +321,83 @@ export default function GeneratingStep() {
           </button>
         </motion.div>
 
-        {/* How to use callout */}
+        {/* Document Preview */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="w-full bg-paper rounded-2xl p-8 md:p-10 mb-8 shadow-elevated-lg border border-muted/10"
+        >
+          <div className="prose prose-sm max-w-none text-ink-light leading-relaxed whitespace-pre-wrap font-body text-sm">
+            {state.generatedDocument && state.generatedDocument.length > 2000
+              ? state.generatedDocument.slice(0, 2000) + '\n\n...'
+              : state.generatedDocument}
+          </div>
+          {state.generatedDocument && state.generatedDocument.length > 2000 && (
+            <p className="text-xs text-muted mt-6 text-center">
+              Preview — download for the full document
+            </p>
+          )}
+        </motion.div>
+
+        {/* How to use */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="w-full bg-accent/5 border border-accent/15 rounded-xl p-5 mb-8"
+          className="w-full bg-ink rounded-2xl p-8 mb-8 text-paper"
         >
-          <p className="text-sm font-medium text-accent mb-2">How to use your constitution:</p>
-          <ul className="text-sm text-ink-light space-y-1.5">
-            <li className="flex items-start gap-2">
-              <span className="text-accent/60 mt-0.5">&bull;</span>
-              Upload to ChatGPT, Claude, or Gemini as a context document
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-accent/60 mt-0.5">&bull;</span>
-              Add it to custom GPTs, Claude Projects, or AI workflows
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-accent/60 mt-0.5">&bull;</span>
-              Reference it before any AI conversation that matters
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-accent/60 mt-0.5">&bull;</span>
-              Update it quarterly as you grow and evolve
-            </li>
-          </ul>
+          <p className="text-sm font-medium text-accent mb-4 uppercase tracking-wider">How to use your constitution</p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              'Upload to ChatGPT, Claude, or Gemini as a context document',
+              'Add it to custom GPTs, Claude Projects, or AI workflows',
+              'Reference it before any AI conversation that matters',
+              'Update it quarterly as you grow and evolve',
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="text-accent mt-0.5 text-sm">0{i + 1}</span>
+                <p className="text-paper/70 text-sm leading-relaxed">{item}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Social Share */}
+        {/* Share + Donate */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mb-8"
+          className="text-center space-y-6 mb-8"
         >
           <SocialShareLinks label="Spread the word:" />
-        </motion.div>
 
-        {/* Donation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="text-center"
-        >
-          <p className="text-sm text-muted mb-2">
-            Did this change how you use AI? Help keep it free.
-          </p>
-          <a
-            href="https://buymeacoffee.com/chadn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors text-sm font-medium"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
-              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
-              <line x1="6" x2="6" y1="2" y2="4" />
-              <line x1="10" x2="10" y1="2" y2="4" />
-              <line x1="14" x2="14" y1="2" y2="4" />
-            </svg>
-            Buy Me a Coffee
-          </a>
+          <div>
+            <p className="text-sm text-muted mb-2">
+              Did this change how you use AI?
+            </p>
+            <a
+              href="https://buymeacoffee.com/chadn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-accent hover:text-accent-hover text-sm font-medium"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                <line x1="6" x2="6" y1="2" y2="4" />
+                <line x1="10" x2="10" y1="2" y2="4" />
+                <line x1="14" x2="14" y1="2" y2="4" />
+              </svg>
+              Buy Me a Coffee
+            </a>
+          </div>
         </motion.div>
       </div>
     </motion.div>
   );
 }
 
-// Simple markdown to HTML converter for PDF printing
 function markdownToHtml(md: string): string {
   return md
     .replace(/^### (.*$)/gm, '<h3>$1</h3>')

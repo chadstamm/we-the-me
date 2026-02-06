@@ -39,7 +39,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
           onClick={onClose}
         >
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-ink/60 backdrop-blur-md" />
 
           {/* Modal */}
           <motion.div
@@ -47,20 +47,20 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative bg-paper rounded-2xl shadow-xl max-w-lg w-full p-8"
+            className="relative bg-paper rounded-2xl shadow-elevated-lg max-w-lg w-full p-10"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-muted hover:text-ink transition-colors"
+              className="absolute top-5 right-5 text-muted hover:text-ink"
               aria-label="Close"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
 
-            <h2 className="text-2xl font-display text-ink mb-4">
+            <h2 className="text-3xl font-display text-ink mb-6">
               About We The Me
             </h2>
 
@@ -79,32 +79,22 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
               <p>
                 Upload it to ChatGPT, Claude, Gemini, or any custom GPT. Use it as the
                 base layer for an AI chief of staff, a Write Like Me codex, or any workflow
-                where personalization matters. Stop starting every AI conversation from zero.
+                where personalization matters.
               </p>
 
               <p>
                 We don&apos;t store your answers. Your constitution is generated in real-time
-                and delivered directly to you. What you do with it is entirely up to you.
+                and delivered directly to you.
               </p>
 
-              <div className="pt-3 border-t border-cream">
-                <p className="text-muted">
+              <div className="pt-5 mt-5 border-t border-cream">
+                <p className="text-muted text-xs">
                   Built by{' '}
-                  <a
-                    href="https://chadstamm.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-accent hover:text-accent-hover transition-colors"
-                  >
+                  <a href="https://chadstamm.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover">
                     Chad Stamm
                   </a>
                   {' & '}
-                  <a
-                    href="https://tmcdigitalmedia.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-accent hover:text-accent-hover transition-colors"
-                  >
+                  <a href="https://tmcdigitalmedia.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover">
                     TMC Digital Media
                   </a>
                 </p>

@@ -6,7 +6,7 @@ interface LogoProps {
 }
 
 const sizeClasses = {
-  sm: 'text-xl',
+  sm: 'text-lg',
   md: 'text-2xl',
   lg: 'text-4xl',
 };
@@ -15,11 +15,11 @@ export default function Logo({ size = 'md', onClick }: LogoProps) {
   return (
     <button
       onClick={onClick}
-      className={`font-display font-normal tracking-tight text-ink hover:text-accent transition-colors ${sizeClasses[size]}`}
+      className={`font-display font-normal tracking-tight text-ink hover:text-accent cursor-pointer ${sizeClasses[size]}`}
       type="button"
       aria-label="Go to home"
     >
-      We The Me
+      We The <span className="text-accent">Me</span>
     </button>
   );
 }

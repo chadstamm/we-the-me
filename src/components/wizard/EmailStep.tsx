@@ -42,40 +42,46 @@ export default function EmailStep() {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.3 }}
-      className="min-h-[calc(100vh-80px)] flex flex-col"
+      className="min-h-screen flex flex-col"
     >
+      {/* Progress bar at top */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-cream">
+        <div className="h-full bg-accent w-full" />
+      </div>
+
       {/* Header */}
-      <div className="px-4 pt-6 pb-4 max-w-2xl mx-auto w-full">
-        <div className="flex items-center justify-between">
-          <Logo
-            size="sm"
-            onClick={() => dispatch({ type: 'SET_STEP', step: 0 })}
-          />
-        </div>
+      <div className="px-6 pt-8 pb-4 max-w-2xl mx-auto w-full">
+        <Logo
+          size="sm"
+          onClick={() => dispatch({ type: 'SET_STEP', step: 0 })}
+        />
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 max-w-md mx-auto w-full py-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 max-w-md mx-auto w-full py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-center mb-8"
+          className="text-center mb-10"
         >
-          <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-accent">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
+          {/* Animated check */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.2 }}
+            className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent">
+              <polyline points="20 6 9 17 4 12" />
             </svg>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-display text-ink mb-3">
+          </motion.div>
+
+          <h2 className="text-3xl md:text-4xl font-display text-ink mb-4 leading-tight">
             You&apos;ve done the hard part
           </h2>
           <p className="text-ink-light leading-relaxed">
-            {answeredCount} reflections across {phaseCount} dimensions of who you are.
-            Now let&apos;s turn that into your Personal Constitution.
+            Now let&apos;s turn your reflections into a Personal Constitution.
           </p>
         </motion.div>
 
@@ -84,20 +90,18 @@ export default function EmailStep() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex gap-8 mb-8"
+          className="flex gap-4 mb-10 w-full"
         >
-          <div className="text-center">
-            <span className="text-3xl font-display text-accent">{answeredCount}</span>
-            <p className="text-xs text-muted mt-1">Reflections</p>
-          </div>
-          <div className="text-center">
-            <span className="text-3xl font-display text-accent">{phaseCount}</span>
-            <p className="text-xs text-muted mt-1">Dimensions</p>
-          </div>
-          <div className="text-center">
-            <span className="text-3xl font-display text-accent">1</span>
-            <p className="text-xs text-muted mt-1">Constitution</p>
-          </div>
+          {[
+            { value: answeredCount, label: 'Reflections' },
+            { value: phaseCount, label: 'Dimensions' },
+            { value: 1, label: 'Constitution' },
+          ].map((stat) => (
+            <div key={stat.label} className="flex-1 bg-paper rounded-xl p-4 text-center shadow-elevated">
+              <span className="text-2xl font-display text-accent block">{stat.value}</span>
+              <p className="text-[11px] text-muted mt-1 uppercase tracking-wider">{stat.label}</p>
+            </div>
+          ))}
         </motion.div>
 
         {/* Form */}
@@ -110,7 +114,7 @@ export default function EmailStep() {
         >
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="firstName" className="block text-sm text-ink-light mb-1.5">
+              <label htmlFor="firstName" className="block text-xs text-muted uppercase tracking-wider mb-2">
                 First name *
               </label>
               <input
@@ -119,12 +123,12 @@ export default function EmailStep() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Your first name"
-                className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
+                className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
                 required
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm text-ink-light mb-1.5">
+              <label htmlFor="lastName" className="block text-xs text-muted uppercase tracking-wider mb-2">
                 Last name
               </label>
               <input
@@ -133,13 +137,13 @@ export default function EmailStep() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Your last name"
-                className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
+                className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm text-ink-light mb-1.5">
+            <label htmlFor="email" className="block text-xs text-muted uppercase tracking-wider mb-2">
               Email *
             </label>
             <input
@@ -148,21 +152,21 @@ export default function EmailStep() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
+              className="w-full bg-paper border border-muted/20 rounded-xl px-4 py-3.5 text-ink placeholder:text-muted/40 focus:outline-none focus:border-accent/40 focus:shadow-elevated"
               required
             />
-            <p className="text-xs text-muted mt-1.5">
+            <p className="text-xs text-muted mt-2">
               We&apos;ll send a copy to your inbox. No spam, no list.
             </p>
           </div>
 
-          <div className="flex items-center justify-between pt-4">
+          <div className="flex items-center justify-between pt-6">
             <button
               type="button"
               onClick={goBack}
-              className="flex items-center gap-2 text-muted hover:text-ink transition-colors text-sm"
+              className="flex items-center gap-2 text-muted hover:text-ink text-sm group"
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="group-hover:-translate-x-0.5 transition-transform">
                 <path d="M10 12L6 8L10 4" />
               </svg>
               Back
@@ -171,9 +175,9 @@ export default function EmailStep() {
             <motion.button
               type="submit"
               disabled={!isValid}
-              whileHover={isValid ? { scale: 1.02 } : {}}
-              whileTap={isValid ? { scale: 0.98 } : {}}
-              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-ink/10"
+              whileHover={isValid ? { scale: 1.02, boxShadow: '0 8px 30px rgba(176, 141, 87, 0.25)' } : {}}
+              whileTap={isValid ? { scale: 0.97 } : {}}
+              className="bg-ink text-paper px-10 py-3.5 rounded-full text-sm font-medium hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed shadow-elevated"
             >
               Generate My Constitution
             </motion.button>

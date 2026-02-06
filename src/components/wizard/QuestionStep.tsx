@@ -57,7 +57,6 @@ export default function QuestionStep() {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Show phase intro when entering a new phase
   useEffect(() => {
     if (!question) return;
     if (prevPhaseRef.current !== null && prevPhaseRef.current !== question.phase) {
@@ -68,7 +67,6 @@ export default function QuestionStep() {
     prevPhaseRef.current = question.phase;
   }, [question]);
 
-  // Reset local state when question changes
   useEffect(() => {
     if (!question) return;
     const answer = getAnswerValue(state.answers, question.id);
@@ -79,7 +77,6 @@ export default function QuestionStep() {
     }
   }, [question, state.answers]);
 
-  // Focus textarea on mount
   useEffect(() => {
     if (textareaRef.current && !showPhaseIntro) {
       textareaRef.current.focus();
@@ -110,15 +107,12 @@ export default function QuestionStep() {
 
   const saveAndAdvance = () => {
     if (!canAdvance()) return;
-
     if (question.inputType === 'multiselect') {
       dispatch({ type: 'SET_ANSWER', questionId: question.id, value: localMultiselect });
     } else {
       dispatch({ type: 'SET_ANSWER', questionId: question.id, value: localValue.trim() });
     }
-
-    const nextStep = state.currentStep + 1;
-    dispatch({ type: 'SET_STEP', step: nextStep });
+    dispatch({ type: 'SET_STEP', step: state.currentStep + 1 });
   };
 
   const goBack = () => {
@@ -149,23 +143,23 @@ export default function QuestionStep() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-4 text-center"
+        className="min-h-screen flex flex-col items-center justify-center px-4 text-center bg-ink"
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', damping: 20, stiffness: 200 }}
         >
-          <p className="text-accent uppercase tracking-[0.2em] text-sm font-medium mb-4">
+          <p className="text-accent uppercase tracking-[0.25em] text-xs font-medium mb-6">
             Phase {question.phase} of {phases.length}
           </p>
-          <h2 className="text-3xl md:text-5xl font-display text-ink mb-4">
+          <h2 className="text-4xl md:text-6xl font-display text-paper mb-4 leading-tight">
             {question.phaseName}
           </h2>
-          <p className="text-lg text-ink-light italic">
+          <p className="text-lg text-paper/60 italic font-display">
             &ldquo;{intro.tagline}&rdquo;
           </p>
-          <p className="text-ink-light mt-4 max-w-md mx-auto">
+          <p className="text-paper/50 mt-4 max-w-md mx-auto text-sm">
             {intro.description}
           </p>
         </motion.div>
@@ -180,33 +174,38 @@ export default function QuestionStep() {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.3 }}
-      className="min-h-[calc(100vh-80px)] flex flex-col"
+      className="min-h-screen flex flex-col"
     >
-      {/* Header: Logo + Progress */}
-      <div className="px-4 pt-6 pb-4 max-w-2xl mx-auto w-full">
-        <div className="flex items-center justify-between mb-6">
+      {/* Progress bar — full width at very top */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-cream">
+        <motion.div
+          className="h-full bg-accent"
+          initial={{ width: 0 }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+        />
+      </div>
+
+      {/* Header */}
+      <div className="px-6 pt-8 pb-4 max-w-2xl mx-auto w-full">
+        <div className="flex items-center justify-between">
           <Logo
             size="sm"
             onClick={() => dispatch({ type: 'SET_STEP', step: 0 })}
           />
-          <span className="text-sm text-muted">
-            {phaseInfo.phaseName} &middot; {questionIndex + 1}/{activeQuestions.length}
-          </span>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="w-full bg-cream rounded-full h-1.5 overflow-hidden">
-          <motion.div
-            className="h-full bg-accent rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-          />
+          <div className="flex items-center gap-3">
+            <span className="text-xs uppercase tracking-wider text-muted">
+              {phaseInfo.phaseName}
+            </span>
+            <span className="text-xs text-accent font-medium bg-accent/10 px-2.5 py-1 rounded-full">
+              {questionIndex + 1}/{activeQuestions.length}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Question Content */}
-      <div className="flex-1 flex flex-col px-4 max-w-2xl mx-auto w-full py-8">
+      {/* Question Content — centered vertically */}
+      <div className="flex-1 flex flex-col justify-center px-6 max-w-2xl mx-auto w-full py-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={question.id + '-content'}
@@ -215,29 +214,28 @@ export default function QuestionStep() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
           >
-            <h2 className="text-2xl md:text-3xl font-display text-ink leading-snug mb-3">
+            <h2 className="text-3xl md:text-4xl font-display text-ink leading-snug mb-4">
               {question.question}
             </h2>
 
             {question.subtext && (
-              <p className="text-ink-light mb-6 leading-relaxed">
+              <p className="text-ink-light mb-8 leading-relaxed text-base">
                 {question.subtext}
               </p>
             )}
 
-            {/* Considerations callout */}
+            {/* Considerations */}
             {question.considerations && question.considerations.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-paper border border-accent/20 rounded-xl p-4 mb-6"
+                className="border-l-2 border-accent/30 pl-5 mb-8"
               >
-                <p className="text-sm font-medium text-accent mb-2">Go deeper:</p>
-                <ul className="space-y-1.5">
+                <p className="text-xs font-medium text-accent uppercase tracking-wider mb-3">Go deeper</p>
+                <ul className="space-y-2">
                   {question.considerations.map((c, i) => (
-                    <li key={i} className="text-sm text-ink-light flex items-start gap-2">
-                      <span className="text-accent/60 mt-0.5 text-xs">&bull;</span>
+                    <li key={i} className="text-sm text-ink-light leading-relaxed">
                       {c}
                     </li>
                   ))}
@@ -249,7 +247,7 @@ export default function QuestionStep() {
 
         {/* Input */}
         {question.inputType === 'multiselect' && question.options ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {question.options.map((option) => {
               const isSelected = localMultiselect.includes(option);
               return (
@@ -260,21 +258,21 @@ export default function QuestionStep() {
                   onClick={() =>
                     setLocalMultiselect((prev) => toggleMultiselectValue(prev, option))
                   }
-                  className={`text-left px-4 py-3 rounded-xl border text-sm transition-all ${
+                  className={`text-left px-5 py-4 rounded-xl border text-sm transition-all ${
                     isSelected
-                      ? 'border-accent bg-accent/10 text-ink'
-                      : 'border-muted/30 bg-paper text-ink-light hover:border-accent/40'
+                      ? 'border-accent bg-accent/8 text-ink shadow-elevated'
+                      : 'border-muted/20 bg-paper text-ink-light hover:border-accent/30 hover:shadow-elevated'
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-3">
                     <span
-                      className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-colors ${
-                        isSelected ? 'bg-accent border-accent' : 'border-muted'
+                      className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
+                        isSelected ? 'bg-accent border-accent' : 'border-muted/40'
                       }`}
                     >
                       {isSelected && (
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path d="M2 5L4 7L8 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </span>
@@ -285,17 +283,17 @@ export default function QuestionStep() {
             })}
           </div>
         ) : question.inputType === 'select' && question.options ? (
-          <div className="space-y-2 mb-6">
+          <div className="space-y-2 mb-8">
             {question.options.map((option) => (
               <motion.button
                 key={option}
                 type="button"
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setLocalValue(option)}
-                className={`w-full text-left px-4 py-3 rounded-xl border text-sm transition-all ${
+                className={`w-full text-left px-5 py-4 rounded-xl border text-sm transition-all ${
                   localValue === option
-                    ? 'border-accent bg-accent/10 text-ink'
-                    : 'border-muted/30 bg-paper text-ink-light hover:border-accent/40'
+                    ? 'border-accent bg-accent/8 text-ink shadow-elevated'
+                    : 'border-muted/20 bg-paper text-ink-light hover:border-accent/30 hover:shadow-elevated'
                 }`}
               >
                 {option}
@@ -303,25 +301,24 @@ export default function QuestionStep() {
             ))}
           </div>
         ) : (
-          <div className="relative mb-6">
+          <div className="relative mb-8">
             <textarea
               ref={textareaRef}
               value={displayValue}
               onChange={(e) => setLocalValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={question.placeholder}
-              rows={6}
-              className="w-full bg-paper border border-muted/30 rounded-xl px-4 py-3 pr-12 text-ink placeholder:text-muted/50 resize-none focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all leading-relaxed"
+              rows={5}
+              className="w-full bg-paper border border-muted/20 rounded-2xl px-6 py-5 pr-14 text-ink text-base placeholder:text-muted/40 resize-none focus:outline-none focus:border-accent/40 focus:shadow-elevated transition-all leading-relaxed"
             />
-            {/* Voice input button */}
             {isSupported && (
               <button
                 type="button"
                 onClick={toggleListening}
-                className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${
+                className={`absolute bottom-4 right-4 p-2.5 rounded-full transition-all ${
                   isListening
-                    ? 'bg-accent text-paper'
-                    : 'bg-cream text-muted hover:text-ink hover:bg-muted/20'
+                    ? 'bg-accent text-paper shadow-lg'
+                    : 'bg-cream text-muted hover:text-ink hover:bg-accent-light'
                 }`}
                 aria-label={isListening ? 'Stop recording' : 'Start voice input'}
               >
@@ -349,13 +346,13 @@ export default function QuestionStep() {
         )}
 
         {/* Navigation */}
-        <div className="flex items-center justify-between mt-auto pt-4">
+        <div className="flex items-center justify-between pt-2">
           <button
             type="button"
             onClick={goBack}
-            className="flex items-center gap-2 text-muted hover:text-ink transition-colors text-sm"
+            className="flex items-center gap-2 text-muted hover:text-ink text-sm group"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="group-hover:-translate-x-0.5 transition-transform">
               <path d="M10 12L6 8L10 4" />
             </svg>
             Back
@@ -366,7 +363,7 @@ export default function QuestionStep() {
               <button
                 type="button"
                 onClick={saveAndAdvance}
-                className="text-sm text-muted hover:text-ink transition-colors"
+                className="text-sm text-muted hover:text-ink"
               >
                 Skip
               </button>
@@ -376,8 +373,8 @@ export default function QuestionStep() {
               onClick={saveAndAdvance}
               disabled={!canAdvance()}
               whileHover={canAdvance() ? { scale: 1.02 } : {}}
-              whileTap={canAdvance() ? { scale: 0.98 } : {}}
-              className="bg-ink text-paper px-6 py-2.5 rounded-full text-sm font-medium hover:bg-ink-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+              whileTap={canAdvance() ? { scale: 0.97 } : {}}
+              className="bg-ink text-paper px-8 py-3 rounded-full text-sm font-medium hover:bg-ink-light disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 shadow-elevated"
             >
               Next
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -387,20 +384,20 @@ export default function QuestionStep() {
           </div>
         </div>
 
-        {/* Keyboard shortcut hint */}
-        <p className="text-center text-xs text-muted mt-4">
-          Press <kbd className="px-1.5 py-0.5 bg-paper border border-muted/30 rounded text-xs">&#8984;+Enter</kbd> to continue
+        {/* Keyboard hint */}
+        <p className="text-center text-xs text-muted/60 mt-6">
+          Press <kbd className="px-1.5 py-0.5 bg-paper border border-muted/20 rounded text-[10px] font-mono">&#8984; Enter</kbd> to continue
         </p>
       </div>
 
-      {/* Phase Dots */}
-      <div className="flex justify-center gap-2 pb-6">
+      {/* Phase dots */}
+      <div className="flex justify-center gap-2 pb-8">
         {phases.map((phase) => (
           <motion.div
             key={phase}
             layout
-            className={`h-2 rounded-full transition-colors ${
-              phase === question.phase ? 'bg-accent w-6' : 'bg-muted/30 w-2'
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              phase === question.phase ? 'bg-accent w-8' : phase < question.phase ? 'bg-accent/40 w-2' : 'bg-muted/20 w-2'
             }`}
           />
         ))}
