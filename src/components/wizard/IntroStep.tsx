@@ -104,33 +104,35 @@ export default function IntroStep() {
             transition={{ delay: 0.8, duration: 0.5 }}
             className="mt-6 mb-2"
           >
-            <svg width="56" height="64" viewBox="0 0 56 64" fill="none" className="mx-auto" xmlns="http://www.w3.org/2000/svg">
-              {/* Top roll — cylinder effect */}
-              <ellipse cx="28" cy="8" rx="20" ry="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
-              <path d="M8 8 C8 5 16 3 28 3 C40 3 48 5 48 8" stroke="rgb(212,185,130)" strokeWidth="0.6" strokeOpacity="0.4" fill="none" />
-              {/* Scroll paper body — unfurled */}
-              <path d="M10 8 L10 54 C10 54 16 56 28 56 C40 56 46 54 46 54 L46 8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-              {/* Paper edge shadow */}
-              <line x1="12" y1="10" x2="12" y2="52" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
-              <line x1="44" y1="10" x2="44" y2="52" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
-              {/* Bottom roll — cylinder effect */}
-              <ellipse cx="28" cy="54" rx="20" ry="4" fill="rgba(176,141,87,0.08)" stroke="rgb(176,141,87)" strokeWidth="1" strokeOpacity="0.5" />
-              <path d="M8 54 C8 57 16 59 28 59 C40 59 48 57 48 54" stroke="rgb(212,185,130)" strokeWidth="0.6" strokeOpacity="0.35" fill="none" />
-              {/* Roll end caps — left side knobs */}
-              <circle cx="8" cy="8" r="2.5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
-              <circle cx="48" cy="8" r="2.5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
-              <circle cx="8" cy="54" r="2.5" fill="rgba(176,141,87,0.1)" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.45" />
-              <circle cx="48" cy="54" r="2.5" fill="rgba(176,141,87,0.1)" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.45" />
-              {/* Text lines — alternating white and gold */}
-              <line x1="16" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" strokeWidth="0.8" />
-              <line x1="16" y1="23" x2="38" y2="23" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.35" />
-              <line x1="16" y1="28" x2="39" y2="28" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" />
-              <line x1="16" y1="33" x2="36" y2="33" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.3" />
-              <line x1="16" y1="38" x2="34" y2="38" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
-              <line x1="16" y1="43" x2="32" y2="43" stroke="rgb(176,141,87)" strokeWidth="0.8" strokeOpacity="0.25" />
-              {/* Wax seal */}
-              <circle cx="38" cy="47" r="4" fill="rgb(176,141,87)" fillOpacity="0.2" stroke="rgb(212,185,130)" strokeWidth="0.8" strokeOpacity="0.5" />
-              <circle cx="38" cy="47" r="1.8" fill="rgb(212,185,130)" fillOpacity="0.5" />
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" className="mx-auto" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round">
+              {/* Scroll body — curled top, rolled bottom */}
+              <path d="M12 10 C12 6 16 4 20 6 C18 4 18 2 22 2 L40 2 C42 2 44 4 44 6 L44 42 C44 44 42 46 40 46 L14 46 C10 46 8 44 8 40 L8 18 C8 14 10 12 12 10 Z" stroke="rgba(255,255,255,0.5)" strokeWidth="2" fill="rgba(255,255,255,0.04)" />
+              {/* Top curl */}
+              <path d="M12 10 C12 6 16 4 20 6 C18 4 18 2 22 2" stroke="rgba(255,255,255,0.5)" strokeWidth="2" fill="none" />
+              <path d="M16 10 C16 8 18 7 20 8" stroke="rgba(255,255,255,0.25)" strokeWidth="1" fill="none" />
+              {/* Bottom roll */}
+              <path d="M8 40 C8 44 10 46 14 46 L40 46 C42 46 44 48 44 50 C44 52 42 54 40 54 L16 54 C12 54 8 52 8 48 Z" stroke="rgb(212,185,130)" strokeWidth="2" strokeOpacity="0.6" fill="rgba(176,141,87,0.06)" />
+              {/* Roll end caps */}
+              <ellipse cx="8" cy="44" rx="2" ry="5" stroke="rgb(212,185,130)" strokeWidth="1.5" strokeOpacity="0.4" fill="rgba(176,141,87,0.05)" />
+              <ellipse cx="44" cy="50" rx="2" ry="4" stroke="rgb(212,185,130)" strokeWidth="1.5" strokeOpacity="0.4" fill="rgba(176,141,87,0.05)" />
+              {/* Text lines */}
+              <line x1="18" y1="14" x2="36" y2="14" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
+              <line x1="18" y1="20" x2="34" y2="20" stroke="rgb(176,141,87)" strokeWidth="1.5" strokeOpacity="0.3" />
+              <line x1="18" y1="26" x2="32" y2="26" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" />
+              <line x1="18" y1="32" x2="30" y2="32" stroke="rgb(176,141,87)" strokeWidth="1.5" strokeOpacity="0.25" />
+              {/* Pen */}
+              <path d="M48 4 L34 38" stroke="rgba(255,255,255,0.45)" strokeWidth="2" />
+              <path d="M48 4 L50 2 C51 1 53 1 54 2 L54 4 C54 5 53 6 52 6 Z" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" fill="rgba(255,255,255,0.08)" />
+              <path d="M36 34 L34 38 L38 36 Z" stroke="rgba(255,255,255,0.4)" strokeWidth="1" fill="rgb(212,185,130)" fillOpacity="0.3" />
+              {/* Pen grip lines */}
+              <line x1="44" y1="14" x2="42" y2="18" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+              <line x1="43" y1="16" x2="41" y2="20" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+              {/* Inkwell */}
+              <path d="M48 44 L48 54 C48 56 50 58 52 58 L56 58 C58 58 60 56 60 54 L60 44 Z" stroke="rgb(212,185,130)" strokeWidth="2" strokeOpacity="0.5" fill="rgba(176,141,87,0.08)" />
+              <path d="M50 44 L50 42 C50 41 51 40 52 40 L56 40 C57 40 58 41 58 42 L58 44" stroke="rgb(212,185,130)" strokeWidth="1.5" strokeOpacity="0.45" fill="rgba(176,141,87,0.06)" />
+              <rect x="52" y="37" width="4" height="3" rx="1" stroke="rgb(212,185,130)" strokeWidth="1.5" strokeOpacity="0.4" fill="rgba(176,141,87,0.08)" />
+              {/* Ink level */}
+              <path d="M49 50 L59 50 L59 54 C59 55.5 57.5 57 56 57 L52 57 C50.5 57 49 55.5 49 54 Z" fill="rgb(176,141,87)" fillOpacity="0.12" />
             </svg>
           </motion.div>
 
