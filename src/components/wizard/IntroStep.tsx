@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useWizard } from '@/context/WizardContext';
-import SocialShareLinks from '@/components/ui/SocialShareLinks';
 
 const steps = [
   {
@@ -87,11 +86,21 @@ export default function IntroStep() {
             </span>
           </motion.h1>
 
+          {/* Subheader */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65, duration: 0.5 }}
+            className="text-2xl md:text-3xl font-display font-light text-paper/40 mt-4 tracking-wide"
+          >
+            Personal Constitution Generator
+          </motion.p>
+
           {/* Ornamental divider */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 0.4, scaleX: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
             className="w-24 h-px bg-gradient-to-r from-transparent via-paper to-transparent mx-auto my-10"
           />
 
@@ -160,7 +169,7 @@ export default function IntroStep() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center text-[11px] uppercase tracking-[0.3em] text-muted mb-20 font-body"
+            className="text-center text-sm uppercase tracking-[0.25em] text-ink font-medium mb-20 font-body"
           >
             Three steps to being understood
           </motion.p>
@@ -212,22 +221,23 @@ export default function IntroStep() {
             </h2>
 
             <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
-              &ldquo;We The People&rdquo; defined a nation&apos;s identity.
-              Your Personal Constitution defines <em className="text-accent not-italic font-normal">yours</em>.
+              A Personal Constitution is your comprehensive resource containing everything
+              about you: your personality, your hopes and dreams, your goals, your challenges,
+              your life, your family, and your work.
             </p>
 
-            <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
+            <p className="text-paper leading-relaxed mb-6 text-lg font-body font-light">
               It&apos;s a structured capture of your values, beliefs, principles, and aspirations &mdash;
               written in your own words. The context document that makes AI actually
-              <em className="text-accent not-italic font-normal"> understand</em> you.
+              understand you.
             </p>
 
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto my-10" />
 
             {/* END RESULT — Life after */}
             <p className="text-paper font-display text-2xl md:text-3xl font-light leading-snug italic">
-              Upload it once. Every conversation
-              <br className="hidden sm:block" /> becomes personal.
+              Upload it <span className="text-accent">once</span>. Every conversation
+              <br className="hidden sm:block" /> becomes <span className="text-accent">personal</span>.
             </p>
           </motion.div>
         </div>
@@ -249,9 +259,6 @@ export default function IntroStep() {
           >
             Begin Your Constitution
           </motion.button>
-          <div className="mt-10">
-            <SocialShareLinks />
-          </div>
         </motion.div>
       </div>
     </motion.div>
