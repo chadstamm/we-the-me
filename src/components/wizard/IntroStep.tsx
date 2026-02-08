@@ -84,36 +84,34 @@ export default function IntroStep() {
             </svg>
           </motion.div>
 
-          {/* Headline — stacked with "The" centered as focal point */}
-          <motion.div
+          {/* Headline — single line with "The" pinned to horizontal center */}
+          <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="flex flex-col items-center mb-2"
+            className="font-display font-light text-paper tracking-tight grid grid-cols-[1fr_auto_1fr] items-baseline w-full mb-2"
           >
-            <h1 className="font-display font-light text-paper tracking-tight text-center">
-              <span className="block text-[clamp(1.5rem,4vw,2.5rem)] leading-none mb-1 text-paper/70">We</span>
-              <span className="block text-[clamp(4rem,12vw,9rem)] leading-[0.9]">The</span>
-              <span className="relative block text-[clamp(4rem,12vw,9rem)] leading-[0.9] mt-[-0.05em]">
-                <motion.span
-                  initial={{ opacity: 1, filter: 'blur(0px)' }}
-                  animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
-                  transition={{ delay: 2.8, duration: 0.6 }}
-                  className="relative inline-block"
-                >
-                  People
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                  transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
-                  className="absolute inset-0 flex items-center justify-center text-accent animate-glow"
-                >
-                  Me
-                </motion.span>
-              </span>
-            </h1>
-          </motion.div>
+            <span className="text-right text-[clamp(2rem,6vw,5rem)] pr-[0.15em]">We</span>
+            <span className="text-[clamp(3rem,9vw,8rem)]">The</span>
+            <span className="relative text-left text-[clamp(3rem,9vw,8rem)] pl-[0.15em]">
+              <motion.span
+                initial={{ opacity: 1, filter: 'blur(0px)' }}
+                animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
+                transition={{ delay: 2.8, duration: 0.6 }}
+                className="relative inline-block"
+              >
+                People
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
+                className="absolute left-0 top-0 pl-[0.15em] text-accent animate-glow"
+              >
+                Me
+              </motion.span>
+            </span>
+          </motion.h1>
 
           {/* Subheader */}
           <motion.p
