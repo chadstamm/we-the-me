@@ -65,52 +65,55 @@ export default function IntroStep() {
             transition={{ delay: 0.35, duration: 0.6 }}
             className="mb-8"
           >
-            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" className="mx-auto text-accent/50">
-              {/* Scroll body */}
-              <rect x="14" y="10" width="24" height="32" rx="2" stroke="currentColor" strokeWidth="0.8" fill="none" />
-              {/* Top scroll curl */}
-              <path d="M14 14 C14 10, 14 8, 18 8 L34 8 C38 8, 38 10, 38 14" stroke="currentColor" strokeWidth="0.8" fill="none" />
-              <path d="M12 14 C12 8, 12 5, 18 5 L34 5 C40 5, 40 8, 40 14" stroke="currentColor" strokeWidth="0.5" opacity="0.4" fill="none" />
-              {/* Bottom scroll curl */}
-              <path d="M14 38 C14 42, 14 44, 18 44 L34 44 C38 44, 38 42, 38 38" stroke="currentColor" strokeWidth="0.8" fill="none" />
-              <path d="M12 38 C12 44, 12 47, 18 47 L34 47 C40 47, 40 44, 40 38" stroke="currentColor" strokeWidth="0.5" opacity="0.4" fill="none" />
-              {/* Text lines on scroll */}
-              <line x1="19" y1="18" x2="33" y2="18" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
-              <line x1="19" y1="22" x2="31" y2="22" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
-              <line x1="19" y1="26" x2="33" y2="26" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
-              <line x1="19" y1="30" x2="28" y2="30" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-              <line x1="19" y1="34" x2="32" y2="34" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+            <svg width="56" height="64" viewBox="0 0 56 64" fill="none" className="mx-auto text-accent">
+              {/* Scroll — rolled parchment with curled top and bottom */}
+              {/* Main parchment body */}
+              <rect x="12" y="14" width="32" height="36" rx="1" stroke="currentColor" strokeWidth="0.7" opacity="0.5" />
+              {/* Top roll — outer curl */}
+              <ellipse cx="28" cy="14" rx="18" ry="4" stroke="currentColor" strokeWidth="0.7" opacity="0.5" fill="none" />
+              {/* Top roll — inner shadow */}
+              <path d="M12 14 Q12 18, 28 18 Q44 18, 44 14" stroke="currentColor" strokeWidth="0.4" opacity="0.25" fill="none" />
+              {/* Bottom roll — outer curl */}
+              <ellipse cx="28" cy="50" rx="18" ry="4" stroke="currentColor" strokeWidth="0.7" opacity="0.5" fill="none" />
+              {/* Written text lines */}
+              <line x1="18" y1="23" x2="38" y2="23" stroke="currentColor" strokeWidth="0.5" opacity="0.35" />
+              <line x1="18" y1="28" x2="35" y2="28" stroke="currentColor" strokeWidth="0.5" opacity="0.25" />
+              <line x1="18" y1="33" x2="38" y2="33" stroke="currentColor" strokeWidth="0.5" opacity="0.35" />
+              <line x1="18" y1="38" x2="32" y2="38" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
+              <line x1="18" y1="43" x2="36" y2="43" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
             </svg>
           </motion.div>
 
-          {/* Headline with People→Me theatrical swap — stacked for centered "The" */}
-          <motion.h1
+          {/* Headline — stacked with "The" centered as focal point */}
+          <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="font-display font-light text-paper leading-[0.85] mb-2 tracking-tight"
+            className="flex flex-col items-center mb-2"
           >
-            <span className="block text-[clamp(2rem,5vw,3.5rem)]">We</span>
-            <span className="block text-[clamp(3.5rem,10vw,8rem)]">The</span>
-            <span className="relative inline-block text-[clamp(3.5rem,10vw,8rem)]">
-              <motion.span
-                initial={{ opacity: 1, filter: 'blur(0px)' }}
-                animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
-                transition={{ delay: 2.8, duration: 0.6 }}
-                className="relative"
-              >
-                People
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
-                className="absolute left-0 top-0 text-accent animate-glow"
-              >
-                Me
-              </motion.span>
-            </span>
-          </motion.h1>
+            <h1 className="font-display font-light text-paper tracking-tight text-center">
+              <span className="block text-[clamp(1.5rem,4vw,2.5rem)] leading-none mb-1 text-paper/70">We</span>
+              <span className="block text-[clamp(4rem,12vw,9rem)] leading-[0.9]">The</span>
+              <span className="relative block text-[clamp(4rem,12vw,9rem)] leading-[0.9] mt-[-0.05em]">
+                <motion.span
+                  initial={{ opacity: 1, filter: 'blur(0px)' }}
+                  animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
+                  transition={{ delay: 2.8, duration: 0.6 }}
+                  className="relative inline-block"
+                >
+                  People
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                  transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
+                  className="absolute inset-0 flex items-center justify-center text-accent animate-glow"
+                >
+                  Me
+                </motion.span>
+              </span>
+            </h1>
+          </motion.div>
 
           {/* Subheader */}
           <motion.p
