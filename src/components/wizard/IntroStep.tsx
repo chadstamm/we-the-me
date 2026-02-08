@@ -39,7 +39,7 @@ export default function IntroStep() {
         {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ink to-transparent" />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
+        <div className="relative z-10 max-w-3xl w-full mx-auto">
           {/* Decorative line */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
