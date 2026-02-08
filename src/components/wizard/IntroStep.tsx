@@ -259,15 +259,15 @@ export default function IntroStep() {
             </h2>
 
             <p className="text-paper/60 leading-relaxed mb-6 text-lg font-body font-light">
-              A Personal Constitution is your comprehensive resource containing everything
+              A Personal Constitution is a comprehensive resource containing everything
               about you: your life, your goals, your challenges, your work, your family,
               your personality, and your hopes and dreams.
             </p>
 
             <p className="text-paper leading-relaxed mb-6 text-lg font-body font-light">
               It&apos;s a structured capture of your values, beliefs, principles, and aspirations &mdash;
-              written in your own words. The context document that makes AI actually
-              understand you.
+              written in your own words. This context document is the ultimate resource that makes AI actually
+              understand you and enhance your unique human capabilities.
             </p>
 
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto my-10" />
