@@ -39,7 +39,7 @@ export default function IntroStep() {
         {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ink to-transparent" />
 
-        <div className="relative z-10 max-w-3xl w-full mx-auto">
+        <div className="relative z-10 max-w-3xl mx-auto">
           {/* Decorative line */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
@@ -65,40 +65,51 @@ export default function IntroStep() {
             transition={{ delay: 0.35, duration: 0.6 }}
             className="mb-8"
           >
-            <svg width="56" height="64" viewBox="0 0 56 64" fill="none" className="mx-auto text-accent">
-              {/* Scroll — rolled parchment with curled top and bottom */}
-              {/* Main parchment body */}
-              <rect x="12" y="14" width="32" height="36" rx="1" stroke="currentColor" strokeWidth="0.7" opacity="0.5" />
-              {/* Top roll — outer curl */}
-              <ellipse cx="28" cy="14" rx="18" ry="4" stroke="currentColor" strokeWidth="0.7" opacity="0.5" fill="none" />
-              {/* Top roll — inner shadow */}
-              <path d="M12 14 Q12 18, 28 18 Q44 18, 44 14" stroke="currentColor" strokeWidth="0.4" opacity="0.25" fill="none" />
-              {/* Bottom roll — outer curl */}
-              <ellipse cx="28" cy="50" rx="18" ry="4" stroke="currentColor" strokeWidth="0.7" opacity="0.5" fill="none" />
-              {/* Written text lines */}
-              <line x1="18" y1="23" x2="38" y2="23" stroke="currentColor" strokeWidth="0.5" opacity="0.35" />
-              <line x1="18" y1="28" x2="35" y2="28" stroke="currentColor" strokeWidth="0.5" opacity="0.25" />
-              <line x1="18" y1="33" x2="38" y2="33" stroke="currentColor" strokeWidth="0.5" opacity="0.35" />
-              <line x1="18" y1="38" x2="32" y2="38" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
-              <line x1="18" y1="43" x2="36" y2="43" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
+            <svg width="72" height="72" viewBox="0 0 80 80" fill="none" className="mx-auto text-paper/50">
+              <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                {/* Scroll — left side */}
+                <path d="M16 18 L16 58" />
+                {/* Scroll — top with curl */}
+                <path d="M16 18 C16 10, 22 6, 30 6 L44 6 C52 6, 56 10, 54 16 C52 20, 48 22, 16 22" />
+                {/* Scroll — right side */}
+                <path d="M48 22 L48 58" />
+                {/* Bottom roll — inner */}
+                <path d="M16 58 C16 64, 32 68, 48 64 C50 63, 50 60, 48 58" />
+                {/* Bottom roll — outer */}
+                <path d="M12 61 C12 71, 34 75, 52 67" />
+                {/* Text lines */}
+                <line x1="22" y1="32" x2="42" y2="32" strokeWidth="2" />
+                <line x1="22" y1="39" x2="38" y2="39" strokeWidth="2" />
+                <line x1="22" y1="46" x2="42" y2="46" strokeWidth="2" />
+                {/* Pen — diagonal */}
+                <line x1="42" y1="52" x2="66" y2="24" />
+                <path d="M66 24 L70 19" strokeWidth="3" />
+                <circle cx="46" cy="48" r="1.5" strokeWidth="1.5" />
+                {/* Inkwell — bottle body */}
+                <path d="M60 60 L60 70 C60 73, 72 73, 72 70 L72 60 C72 58, 60 58, 60 60" />
+                {/* Inkwell — neck */}
+                <path d="M63 58 L63 54 L69 54 L69 58" strokeWidth="2" />
+                {/* Inkwell — stopper */}
+                <path d="M64.5 54 L64.5 51 L67.5 51 L67.5 54" strokeWidth="2" />
+              </g>
             </svg>
           </motion.div>
 
-          {/* Headline — single line with "The" pinned to horizontal center */}
+          {/* Headline with People→Me theatrical swap — stacked for centered "The" */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="font-display font-light text-paper tracking-tight grid grid-cols-[1fr_auto_1fr] items-baseline w-full mb-2"
+            className="font-display font-light text-paper leading-[0.85] mb-2 tracking-tight"
           >
-            <span className="text-right text-[clamp(2rem,6vw,5rem)] pr-[0.15em]">We</span>
-            <span className="text-[clamp(3rem,9vw,8rem)]">The</span>
-            <span className="relative text-left text-[clamp(3rem,9vw,8rem)] pl-[0.15em]">
+            <span className="block text-[clamp(2rem,5vw,3.5rem)]">We</span>
+            <span className="block text-[clamp(3.5rem,10vw,8rem)]">The</span>
+            <span className="relative inline-block text-[clamp(3.5rem,10vw,8rem)]">
               <motion.span
                 initial={{ opacity: 1, filter: 'blur(0px)' }}
                 animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
                 transition={{ delay: 2.8, duration: 0.6 }}
-                className="relative inline-block"
+                className="relative"
               >
                 People
               </motion.span>
@@ -106,7 +117,7 @@ export default function IntroStep() {
                 initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
-                className="absolute left-0 top-0 pl-[0.15em] text-accent animate-glow"
+                className="absolute left-0 top-0 text-accent animate-glow"
               >
                 Me
               </motion.span>
