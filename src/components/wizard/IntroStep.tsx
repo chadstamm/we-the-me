@@ -39,7 +39,7 @@ export default function IntroStep() {
         {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ink to-transparent" />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
+        <div className="relative z-10 max-w-3xl w-full mx-auto">
           {/* Decorative line */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
@@ -65,10 +65,21 @@ export default function IntroStep() {
             transition={{ delay: 0.35, duration: 0.6 }}
             className="mb-8"
           >
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="mx-auto">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="0.5" className="text-accent/30" />
-              <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="0.5" className="text-accent/20" />
-              <text x="24" y="28" textAnchor="middle" className="text-accent" fill="currentColor" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="16" fontWeight="300" letterSpacing="2">WM</text>
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" className="mx-auto text-accent/50">
+              {/* Scroll body */}
+              <rect x="14" y="10" width="24" height="32" rx="2" stroke="currentColor" strokeWidth="0.8" fill="none" />
+              {/* Top scroll curl */}
+              <path d="M14 14 C14 10, 14 8, 18 8 L34 8 C38 8, 38 10, 38 14" stroke="currentColor" strokeWidth="0.8" fill="none" />
+              <path d="M12 14 C12 8, 12 5, 18 5 L34 5 C40 5, 40 8, 40 14" stroke="currentColor" strokeWidth="0.5" opacity="0.4" fill="none" />
+              {/* Bottom scroll curl */}
+              <path d="M14 38 C14 42, 14 44, 18 44 L34 44 C38 44, 38 42, 38 38" stroke="currentColor" strokeWidth="0.8" fill="none" />
+              <path d="M12 38 C12 44, 12 47, 18 47 L34 47 C40 47, 40 44, 40 38" stroke="currentColor" strokeWidth="0.5" opacity="0.4" fill="none" />
+              {/* Text lines on scroll */}
+              <line x1="19" y1="18" x2="33" y2="18" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+              <line x1="19" y1="22" x2="31" y2="22" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+              <line x1="19" y1="26" x2="33" y2="26" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+              <line x1="19" y1="30" x2="28" y2="30" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
+              <line x1="19" y1="34" x2="32" y2="34" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
             </svg>
           </motion.div>
 
