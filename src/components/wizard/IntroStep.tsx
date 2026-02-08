@@ -95,21 +95,21 @@ export default function IntroStep() {
             </svg>
           </motion.div>
 
-          {/* Headline with People→Me theatrical swap — stacked for centered "The" */}
+          {/* Headline — single line, centered on "The" */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="font-display font-light text-paper leading-[0.85] mb-2 tracking-tight"
+            className="font-display font-light text-paper tracking-tight grid grid-cols-[1fr_auto_1fr] items-baseline w-full mb-2 text-[clamp(2.5rem,8vw,7rem)]"
           >
-            <span className="block text-[clamp(2rem,5vw,3.5rem)]">We</span>
-            <span className="block text-[clamp(3.5rem,10vw,8rem)]">The</span>
-            <span className="relative inline-block text-[clamp(3.5rem,10vw,8rem)]">
+            <span className="text-right pr-[0.2em]">We</span>
+            <span>The</span>
+            <span className="relative text-left pl-[0.2em]">
               <motion.span
                 initial={{ opacity: 1, filter: 'blur(0px)' }}
                 animate={{ opacity: 0, filter: 'blur(8px)', y: -8 }}
                 transition={{ delay: 2.8, duration: 0.6 }}
-                className="relative"
+                className="relative inline-block"
               >
                 People
               </motion.span>
@@ -117,7 +117,7 @@ export default function IntroStep() {
                 initial={{ opacity: 0, scale: 0.85, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 transition={{ delay: 3.2, duration: 0.6, type: 'spring', damping: 15, stiffness: 150 }}
-                className="absolute left-0 top-0 text-accent animate-glow"
+                className="absolute left-0 top-0 pl-[0.2em] text-accent animate-glow"
               >
                 Me
               </motion.span>
