@@ -1,6 +1,6 @@
-StoryBrand messaging framework based on Donald Miller's "Building a StoryBrand". Use when you need to: (1) clarify your brand message so customers understand it, (2) create website copy that converts, (3) write one-liners and elevator pitches, (4) build landing pages that follow narrative structure, (5) create marketing collateral that positions customer as hero, (6) diagnose why messaging isn't resonating, (7) develop a brand script for consistent communication.
+StoryBrand messaging framework based on Donald Miller's "Building a StoryBrand 2.0". Use when you need to: (1) clarify your brand message so customers understand it, (2) create website copy that converts, (3) write one-liners and elevator pitches, (4) build landing pages that follow narrative structure, (5) create marketing collateral that positions customer as hero, (6) diagnose why messaging isn't resonating, (7) develop a brand script for consistent communication, (8) craft the 5 PEACE soundbites, (9) build a sales funnel using Curiosity → Enlightenment → Commitment.
 
-# StoryBrand Messaging Framework
+# StoryBrand 2.0 Messaging Framework
 
 Framework for clarifying your message so customers will listen. Based on a fundamental truth: customers don't buy the best products—they buy the ones they can understand the fastest.
 
@@ -11,6 +11,104 @@ Framework for clarifying your message so customers will listen. Based on a funda
 ## Scoring
 
 **Goal: 10/10.** When reviewing or creating marketing copy or brand messaging, rate it 0-10 based on adherence to the principles below. A 10/10 means full alignment with all guidelines; lower scores indicate gaps to address. Always provide the current score and specific improvements needed to reach 10/10.
+
+---
+
+## The House Metaphor — How Customers Buy
+
+Think of your brand as a house. There are **five front steps**, a **front porch**, and a **front door**. This design makes a house inviting, warm, and friendly. Most businesses are missing the front steps entirely — which is why customers never make it to the porch or through the door.
+
+| Part of the House | Phase | What It Is | What Goes Here |
+|-------------------|-------|------------|----------------|
+| **5 Front Steps** | Curiosity | The PEACE soundbites that catch attention | Problem, Empathy, Answer, Change, End Result |
+| **Front Porch** | Enlightenment | Where customers do due diligence | Lead magnets, white papers, webinars, YouTube videos, educational content |
+| **Front Door** | Commitment | Where they pull out the credit card | Clear CTA, buy button, sign-up, low-friction conversion |
+
+**Critical mistake:** Most businesses skip the front steps and start at the porch (or worse, the front door). They overwhelm customers who aren't yet attentive or invested. Build the steps first.
+
+---
+
+## The Three Phases of a Customer Relationship
+
+Relationships progress in phases. You would never propose marriage on a first date. Your customers are the same — they need to move through three stages before they commit.
+
+### Phase 1: Curiosity
+
+All you need to do is catch a potential customer's eye. It's about a split-second decision — maybe they see an ad, hear a friend mention your company, or glimpse a headline. They're now curious to know more.
+
+**Your job:** Deliver the 5 PEACE soundbites (see below). These are the "front steps" that invite people into the story. Almost every business gets this wrong.
+
+### Phase 2: Enlightenment
+
+The customer is curious and doing their due diligence. Your marketing fills in the details — what problems you solve, what solution you provide, how their life will change.
+
+**Your job:** Provide lead generators, educational content, webinars, and nurture sequences that build trust and reduce confusion. Confused people don't buy.
+
+### Phase 3: Commitment
+
+The customer is ready to make a decision. This is where you ask for the sale.
+
+**Your job:** Make the "front door" obvious and low-friction. Use commitment copy that follows this formula: *"If you're struggling with X, buying Y is the right decision."* People delay buying when they aren't sure it's the right decision — give them that assurance explicitly and simply.
+
+---
+
+## The PEACE Soundbites (StoryBrand 2.0)
+
+The 5 PEACE soundbites are a simplified, actionable distillation of the SB7 framework. They are the "five front steps" to your house. You need all five or nobody ends up on your front porch.
+
+### P — Problem
+Own a problem. People are problem-solving animals — when we have a problem, we immediately notice anything that will help us solve it. Own a problem and turn it into a soundbite that generates attention.
+
+### E — Empathy
+Create an empathetic bond by relating to your customer and the pain their problem has created in their life. Show you understand how they feel.
+
+### A — Answer
+Position your business as the solution to your customer's problem. Make the next step clear and simple.
+
+### C — Change
+Describe the transformation. Add personal value and increase the perceived value of the offer. How will their life change?
+
+### E — End Result
+Cast a vision that motivates and creates action. Paint the picture of life after the problem is solved.
+
+### PEACE Example: YNAB (Budgeting App)
+
+| Soundbite | Copy |
+|-----------|------|
+| **Problem** | "Have you ever worried about money?" |
+| **Empathy** | "We know how it feels to worry about money." |
+| **Answer** | "Don't overthink it. Just download the YNAB app." |
+| **Change** | "We will help you get good with money." |
+| **End Result** | "So you never have to worry about money again." |
+
+### PEACE Example: Franchise Sidekick
+
+| Soundbite | Copy |
+|-----------|------|
+| **Problem** | "Want to own a business but don't know where to start?" |
+| **Empathy** | "We've helped thousands who felt the same way." |
+| **Answer** | "Book a free call with a Franchise Sidekick Advisor." |
+| **Change** | "We'll narrow 4,000+ brands to a short list that fits your goals." |
+| **End Result** | "So you can buy confidently and start living life on your terms." |
+
+### Why Soundbites Work
+
+Soundbites reduce **cognitive load** — the mental energy customers spend trying to understand your offer. With the right soundbites, your message lands instantly and people buy. Complexity repels customers. Your competitors with inferior products but clearer messages are winning business that should be yours.
+
+### How to Test Your Soundbites
+
+- **30-day site swap:** Replace homepage copy with your PEACE soundbites. Did leads or sales rise 20%+? Keep iterating.
+- **A/B test headlines and CTAs:** Simple beats clever 9/10 times.
+- **Social "spark tests":** Turn each soundbite into a post. Track saves, shares, and comments.
+- **Ship five soundbites, repeat relentlessly** across social media, emails, landing pages, elevator pitches, sales conversations, proposals, and pitch decks.
+
+### Common Soundbite Pitfalls
+
+- Trying to sound smart — speak plainly, avoid insider terms
+- Explaining features instead of naming the problem you solve
+- Too many messages — five soundbites, repeated everywhere
+
+---
 
 ## The SB7 Framework
 
