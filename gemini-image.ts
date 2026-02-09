@@ -13,7 +13,9 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs/promises';
 import path from 'path';
 
-const MODEL_ID = 'gemini-3-pro-image-preview';
+// Free tier: 'gemini-2.5-flash-image' (~1,500 req/day, no billing required)
+// Paid tier: 'gemini-3-pro-image-preview' (requires billing, higher quality)
+const DEFAULT_MODEL = 'gemini-2.5-flash-image';
 
 export type AspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4';
 export type ImageSize = '1K' | '2K' | '4K';
@@ -35,6 +37,7 @@ export interface ImageOptions {
   imageSize?: ImageSize;
   referenceImages?: ReferenceImage[];
   outputFormat?: 'png' | 'webp';
+  model?: string;
 }
 
 export interface ImageResult {
@@ -92,8 +95,9 @@ export async function generateImage(options: ImageOptions, basePath?: string): P
   const imageSize = options.imageSize || '1K';
   const { width, height } = getDimensions(aspectRatio, imageSize);
 
+  const modelId = options.model || DEFAULT_MODEL;
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: MODEL_ID });
+  const model = genAI.getGenerativeModel({ model: modelId });
 
   const parts: any[] = [];
 
@@ -141,5 +145,5 @@ export async function generateImage(options: ImageOptions, basePath?: string): P
 
   console.log(`Generated in ${Date.now() - startTime}ms (${imageBuffer.length} bytes)`);
 
-  return { buffer: imageBuffer, mimeType, width, height, model: MODEL_ID, aspectRatio, imageSize };
+  return { buffer: imageBuffer, mimeType, width, height, model: modelId, aspectRatio, imageSize };
 }

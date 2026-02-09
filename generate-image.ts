@@ -28,6 +28,7 @@ async function main() {
       reference: { type: 'string', short: 'r', multiple: true },
       negative: { type: 'string' },
       format: { type: 'string', default: 'png' },
+      model: { type: 'string', short: 'm', default: 'gemini-2.5-flash-image' },
       edit: { type: 'boolean', default: false },
       help: { type: 'boolean', short: 'h' },
     },
@@ -47,6 +48,7 @@ Options:
   --reference, -r  Reference image (repeatable)
   --negative       What to avoid
   --format         png or webp (default: png)
+  --model, -m      Model: gemini-2.5-flash-image (free) or gemini-3-pro-image-preview (paid)
   --edit           Edit mode
   --help, -h       Show help
 
@@ -68,6 +70,7 @@ Examples:
 
   const referenceImages = values.reference?.map((p: string) => ({ source: 'file' as const, path: p }));
 
+  console.log(`Model: ${values.model}`);
   console.log(`Mode: ${mode}`);
   console.log(`Prompt: "${values.prompt.slice(0, 50)}${values.prompt.length > 50 ? '...' : ''}"`);
   console.log(`Aspect: ${aspectRatio}, Size: ${imageSize}`);
@@ -81,6 +84,7 @@ Examples:
       imageSize,
       referenceImages,
       outputFormat: values.format === 'webp' ? 'webp' : 'png',
+      model: values.model,
     }, process.cwd());
 
     await mkdir(dirname(resolve(values.output)), { recursive: true });

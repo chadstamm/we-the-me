@@ -56,6 +56,7 @@ npx tsx generate-image.ts -p "Change the left robot to red, add more flowers" -o
 | `--reference` | `-r` | Reference image path (repeatable for multiple) | — |
 | `--negative` | | What to avoid in the image | — |
 | `--format` | | `png` or `webp` | `png` |
+| `--model` | `-m` | `gemini-2.5-flash-image` (free) or `gemini-3-pro-image-preview` (paid) | `gemini-2.5-flash-image` |
 | `--edit` | | Enable edit mode (requires `--reference`) | `false` |
 
 ## How Claude Should Use This Skill
@@ -85,8 +86,14 @@ When the user asks for image generation or editing:
 - **App icons**: `--aspectRatio 1:1 --imageSize 1K`
 - **Hero images**: `--aspectRatio 16:9 --imageSize 4K`
 
-### Pricing
-Approximately $0.008 per image with Gemini Flash, slightly more with Pro models.
+### Models & Pricing
+
+| Model | Tier | Cost | Notes |
+|-------|------|------|-------|
+| `gemini-2.5-flash-image` | **Free** | $0 (up to ~1,500 req/day) | Default. No billing required. |
+| `gemini-3-pro-image-preview` | Paid | ~$0.13/image (1K-2K), ~$0.24/image (4K) | Higher quality. Requires billing enabled. |
+
+Use `--model` to switch: `--model gemini-3-pro-image-preview`
 
 ---
 
@@ -110,7 +117,9 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs/promises';
 import path from 'path';
 
-const MODEL_ID = 'gemini-3-pro-image-preview';
+// Free tier: 'gemini-2.5-flash-image' (~1,500 req/day, no billing required)
+// Paid tier: 'gemini-3-pro-image-preview' (requires billing, higher quality)
+const DEFAULT_MODEL = 'gemini-2.5-flash-image';
 
 export type AspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4';
 export type ImageSize = '1K' | '2K' | '4K';
@@ -132,6 +141,7 @@ export interface ImageOptions {
   imageSize?: ImageSize;
   referenceImages?: ReferenceImage[];
   outputFormat?: 'png' | 'webp';
+  model?: string;
 }
 
 export interface ImageResult {
@@ -189,8 +199,9 @@ export async function generateImage(options: ImageOptions, basePath?: string): P
   const imageSize = options.imageSize || '1K';
   const { width, height } = getDimensions(aspectRatio, imageSize);
 
+  const modelId = options.model || DEFAULT_MODEL;
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: MODEL_ID });
+  const model = genAI.getGenerativeModel({ model: modelId });
 
   const parts: any[] = [];
 
@@ -238,7 +249,7 @@ export async function generateImage(options: ImageOptions, basePath?: string): P
 
   console.log(`Generated in ${Date.now() - startTime}ms (${imageBuffer.length} bytes)`);
 
-  return { buffer: imageBuffer, mimeType, width, height, model: MODEL_ID, aspectRatio, imageSize };
+  return { buffer: imageBuffer, mimeType, width, height, model: modelId, aspectRatio, imageSize };
 }
 ```
 
@@ -275,6 +286,7 @@ async function main() {
       reference: { type: 'string', short: 'r', multiple: true },
       negative: { type: 'string' },
       format: { type: 'string', default: 'png' },
+      model: { type: 'string', short: 'm', default: 'gemini-2.5-flash-image' },
       edit: { type: 'boolean', default: false },
       help: { type: 'boolean', short: 'h' },
     },
@@ -294,6 +306,7 @@ Options:
   --reference, -r  Reference image (repeatable)
   --negative       What to avoid
   --format         png or webp (default: png)
+  --model, -m      Model: gemini-2.5-flash-image (free) or gemini-3-pro-image-preview (paid)
   --edit           Edit mode
   --help, -h       Show help
 
@@ -315,6 +328,7 @@ Examples:
 
   const referenceImages = values.reference?.map((p: string) => ({ source: 'file' as const, path: p }));
 
+  console.log(`Model: ${values.model}`);
   console.log(`Mode: ${mode}`);
   console.log(`Prompt: "${values.prompt.slice(0, 50)}${values.prompt.length > 50 ? '...' : ''}"`);
   console.log(`Aspect: ${aspectRatio}, Size: ${imageSize}`);
@@ -328,6 +342,7 @@ Examples:
       imageSize,
       referenceImages,
       outputFormat: values.format === 'webp' ? 'webp' : 'png',
+      model: values.model,
     }, process.cwd());
 
     await mkdir(dirname(resolve(values.output)), { recursive: true });
