@@ -65,32 +65,20 @@ export default function IntroStep() {
             transition={{ delay: 0.35, duration: 0.6 }}
             className="mb-8"
           >
-            <svg width="72" height="72" viewBox="0 0 80 80" fill="none" className="mx-auto text-paper/50">
-              <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                {/* Scroll — left side */}
-                <path d="M16 18 L16 58" />
-                {/* Scroll — top with curl */}
-                <path d="M16 18 C16 10, 22 6, 30 6 L44 6 C52 6, 56 10, 54 16 C52 20, 48 22, 16 22" />
-                {/* Scroll — right side */}
-                <path d="M48 22 L48 58" />
-                {/* Bottom roll — inner */}
-                <path d="M16 58 C16 64, 32 68, 48 64 C50 63, 50 60, 48 58" />
-                {/* Bottom roll — outer */}
-                <path d="M12 61 C12 71, 34 75, 52 67" />
-                {/* Text lines */}
-                <line x1="22" y1="32" x2="42" y2="32" strokeWidth="2" />
-                <line x1="22" y1="39" x2="38" y2="39" strokeWidth="2" />
-                <line x1="22" y1="46" x2="42" y2="46" strokeWidth="2" />
-                {/* Pen — diagonal */}
-                <line x1="42" y1="52" x2="66" y2="24" />
-                <path d="M66 24 L70 19" strokeWidth="3" />
-                <circle cx="46" cy="48" r="1.5" strokeWidth="1.5" />
-                {/* Inkwell — bottle body */}
-                <path d="M60 60 L60 70 C60 73, 72 73, 72 70 L72 60 C72 58, 60 58, 60 60" />
-                {/* Inkwell — neck */}
-                <path d="M63 58 L63 54 L69 54 L69 58" strokeWidth="2" />
-                {/* Inkwell — stopper */}
-                <path d="M64.5 54 L64.5 51 L67.5 51 L67.5 54" strokeWidth="2" />
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" className="mx-auto">
+              <g stroke="currentColor" strokeLinecap="round" className="text-paper/40">
+                {/* Quill shaft — elegant sweeping curve */}
+                <path d="M44 6 C42 14, 36 28, 28 42 C24 50, 20 56, 18 58" strokeWidth="1.8" className="text-accent/60" />
+                {/* Left barbs — soft feather edge */}
+                <path d="M44 6 C36 10, 28 22, 24 34" strokeWidth="1.2" opacity="0.35" />
+                <path d="M40 14 C34 20, 28 30, 26 38" strokeWidth="1" opacity="0.2" />
+                {/* Right barbs — soft feather edge */}
+                <path d="M44 6 C48 14, 44 28, 34 40" strokeWidth="1.2" opacity="0.35" />
+                <path d="M44 12 C46 20, 42 32, 32 42" strokeWidth="1" opacity="0.2" />
+                {/* Nib tip */}
+                <path d="M18 58 L16 62" strokeWidth="1.5" className="text-accent/50" />
+                {/* Ink dot */}
+                <circle cx="15.5" cy="63" r="1.2" fill="currentColor" className="text-accent/30" />
               </g>
             </svg>
           </motion.div>
@@ -134,13 +122,17 @@ export default function IntroStep() {
             Personal Constitution Generator
           </motion.p>
 
-          {/* Ornamental divider */}
+          {/* Ornamental divider with diamond */}
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 0.4, scaleX: 1 }}
+            animate={{ opacity: 1, scaleX: 1 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="w-24 h-px bg-gradient-to-r from-transparent via-paper to-transparent mx-auto my-10"
-          />
+            className="flex items-center justify-center gap-3 my-10"
+          >
+            <div className="w-12 h-px bg-gradient-to-r from-transparent to-accent/30" />
+            <div className="w-1.5 h-1.5 rotate-45 bg-accent/40" />
+            <div className="w-12 h-px bg-gradient-to-l from-transparent to-accent/30" />
+          </motion.div>
 
           {/* EMPATHY — Shows understanding */}
           <motion.p
@@ -226,7 +218,7 @@ export default function IntroStep() {
                 <span className="absolute -top-8 -left-2 text-[7rem] font-display font-light text-accent/[0.07] leading-none select-none pointer-events-none">
                   {step.number}
                 </span>
-                <div className="relative bg-paper rounded-2xl p-8 pt-10 shadow-elevated hover:shadow-elevated-lg transition-shadow duration-500">
+                <div className="relative bg-paper rounded-2xl p-8 pt-10 shadow-elevated hover:shadow-elevated-lg transition-shadow duration-500 border-t-2 border-accent/20 hover:border-accent/50 transition-all">
                   <p className="text-accent text-xs font-medium tracking-[0.2em] uppercase mb-4 font-body">Step {step.number}</p>
                   <h3 className="text-2xl font-display font-semibold text-ink mb-3">{step.title}</h3>
                   <p className="text-sm text-ink-light leading-relaxed font-body">{step.description}</p>
@@ -282,13 +274,24 @@ export default function IntroStep() {
       </div>
 
       {/* ─── BOTTOM CTA ─── */}
-      <div className="py-24 px-4 text-center bg-cream">
+      <div className="py-28 px-4 text-center bg-cream relative overflow-hidden">
+        {/* Subtle radial accent from center */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_50%,rgba(176,141,87,0.06),transparent)]" />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="relative z-10"
         >
-          <p className="text-ink text-lg font-medium mb-8 font-body">Ready to be understood?</p>
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 0.4, scaleX: 1 }}
+            viewport={{ once: true }}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-10"
+          />
+          <p className="text-2xl md:text-3xl font-display font-light text-ink mb-3">Ready to be understood?</p>
+          <p className="text-ink-light text-sm font-body mb-10">15 minutes. Free. Yours forever.</p>
           <motion.button
             whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(176, 141, 87, 0.25)' }}
             whileTap={{ scale: 0.97 }}
