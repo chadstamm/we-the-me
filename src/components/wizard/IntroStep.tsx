@@ -265,9 +265,9 @@ export default function IntroStep() {
             </p>
 
             <p className="text-paper leading-relaxed mb-6 text-lg font-body font-light">
-              It&apos;s a structured capture of your values, beliefs, principles, and aspirations &mdash;
-              written in your own words. This context document is the ultimate resource that makes AI actually
-              understand you and enhance your unique human capabilities.
+              This context document is the ultimate resource that makes AI actually
+              understand you and enhance your unique human capabilities. It&apos;s a structured capture of your values, beliefs, principles, and aspirations &mdash;
+              written in your own words.
             </p>
 
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto my-10" />
