@@ -34,6 +34,34 @@ const phaseIntros: Record<number, { tagline: string; description: string }> = {
     tagline: 'What makes you, you',
     description: 'The most powerful AI context comes from the truths we rarely share. Go deep here.',
   },
+  6: {
+    tagline: 'Build your full context vault',
+    description: 'Your constitution is the foundation. Now choose which areas of your life to map for AI.',
+  },
+  7: {
+    tagline: 'Your professional world, decoded',
+    description: 'Help AI understand your role, strengths, challenges, and where you\'re headed.',
+  },
+  8: {
+    tagline: 'Your venture, fully mapped',
+    description: 'Give AI the full picture of what you\'re building — the wins, the problems, and the vision.',
+  },
+  9: {
+    tagline: 'The foundation of everything else',
+    description: 'Your daily life, health, joy, and stress — the context that shapes every other decision.',
+  },
+  10: {
+    tagline: 'The people you choose',
+    description: 'Your friendships reveal your needs, your patterns, and your heart.',
+  },
+  11: {
+    tagline: 'The relationships that shaped you',
+    description: 'Family — the one you were born into and the one you\'ve built.',
+  },
+  12: {
+    tagline: 'What you\'re building toward',
+    description: 'Your goals, priorities, and the obstacles standing in the way.',
+  },
 };
 
 export default function QuestionStep() {
